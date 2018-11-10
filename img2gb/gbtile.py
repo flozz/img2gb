@@ -34,3 +34,8 @@ class GBTile(object):
 
     def to_hex_string(self):
         return " ".join(["%02X" % b for b in self.data])
+
+    def __eq__(self, other):
+        if not isinstance(other, GBTile):
+            return False
+        return self.to_hex_string() == other.to_hex_string()
