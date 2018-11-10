@@ -1,4 +1,20 @@
+from .helpers import rgba_brightness, brightness_to_color_id
+
+
 class GBTile(object):
+
+    @classmethod
+    def from_image(Cls, pil_image, tile_x=0, tile_y=0):
+        tile = Cls()
+
+        for y in range(8):
+            for x in range(8):
+                pix_rgb = pil_image.getpixel((tile_x + x, tile_y + y))
+                pix_brightness = rgba_brightness(*pix_rgb)
+                color_id = brightness_to_color_id(pix_brightness)
+                tile.put_pixel(x, y, color_id)
+
+        return tile
 
     def __init__(self):
         self.data = [0x00] * 16

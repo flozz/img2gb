@@ -1,5 +1,4 @@
 from .gbtile import GBTile
-from .helpers import rgba_brightness, brightness_to_color_id
 
 
 class GBTileset(object):
@@ -17,13 +16,7 @@ class GBTileset(object):
 
         for tile_y in range(0, height, 8):
             for tile_x in range(0, width, 8):
-                tile = GBTile()
-                for y in range(8):
-                    for x in range(8):
-                        pix_rgb = pil_image.getpixel((tile_x + x, tile_y + y))
-                        pix_brightness = rgba_brightness(*pix_rgb)
-                        color_id = brightness_to_color_id(pix_brightness)
-                        tile.put_pixel(x, y, color_id)
+                tile = GBTile.from_image(pil_image, tile_x, tile_y)
                 tileset.add_tile(tile)
 
         return tileset
