@@ -24,9 +24,12 @@ class GBTileset(object):
     def __init__(self):
         self.tiles = []
 
-    def add_tile(self, gbtile):
+    def add_tile(self, gbtile, dedup=False):
+        if dedup and gbtile in self.tiles:
+            return self.tiles.index(gbtile)
         # TODO check tile count <= 255
         self.tiles.append(gbtile)
+        return len(self.tiles) - 1
 
     def to_hex_string(self):
         result = ""

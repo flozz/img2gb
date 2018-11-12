@@ -23,4 +23,11 @@ def parse_cli(args):
             default=None,
             help="Output file for C Header (.h)"
             )
+    parser.add_argument(
+            "-m",
+            "--map",
+            action="store_true",
+            default=False,
+            help="Add tilemap to the .c / .h files"
+            )
     return parser.parse_args(args)
