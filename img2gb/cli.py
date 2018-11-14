@@ -37,4 +37,11 @@ def parse_cli(args):
             default=False,
             help="Remove duplicated tiles from the tileset"
             )
+    parser.add_argument(
+            "-n",
+            "--name",
+            type=str,
+            default="TILESET",
+            help="Name of the tileset (used for variable names in generated code, default=TILESET)"  # noqa
+            )
     return parser.parse_args(args)

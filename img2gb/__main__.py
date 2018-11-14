@@ -14,9 +14,9 @@ def main(argv=sys.argv):
     tileset = tilemap.tileset
     if not args.map:
         tilemap = None
-    args.c_file.write(tileset_to_c(tileset, tilemap))
+    args.c_file.write(tileset_to_c(tileset, tilemap, name=args.name))
     if args.header_file:
-        args.header_file.write(tileset_to_h(tileset, tilemap))
+        args.header_file.write(tileset_to_h(tileset, tilemap, name=args.name))
 
 
 if __name__ == "__main__":
