@@ -30,4 +30,11 @@ def parse_cli(args):
             default=False,
             help="Add tilemap to the .c / .h files"
             )
+    parser.add_argument(
+            "-d",
+            "--deduplicate",
+            action="store_true",
+            default=False,
+            help="Remove duplicated tiles from the tileset"
+            )
     return parser.parse_args(args)

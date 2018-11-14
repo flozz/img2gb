@@ -5,7 +5,7 @@ from .gbtileset import GBTileset
 class GBTilemap(object):
 
     @classmethod
-    def from_image(Cls, pil_image, gbtileset=None):
+    def from_image(Cls, pil_image, gbtileset=None, dedup=True):
         width, height = pil_image.size
 
         if width % 8 or height % 8:
@@ -19,7 +19,7 @@ class GBTilemap(object):
         for tile_y in range(0, height, 8):
             for tile_x in range(0, width, 8):
                 tile = GBTile.from_image(pil_image, tile_x, tile_y)
-                tilemap.put_tile(tile_x / 8, tile_y / 8, tile, dedup=True)
+                tilemap.put_tile(tile_x / 8, tile_y / 8, tile, dedup=dedup)
 
         return tilemap
 
@@ -39,7 +39,6 @@ class GBTilemap(object):
 
         tile_id = self.tileset.add_tile(gbtile, dedup)
         index = y * self.width + x
-        print(tile_id)
 
         self.map[index] = tile_id
 
