@@ -118,5 +118,6 @@ tilset.c (truncated)::
 Changelog
 ---------
 
+* **0.9.1:** Fixes an issue with Python 3
 * **0.9.0:** Initial release (generates tiles, tilesets and tilemaps)
 
