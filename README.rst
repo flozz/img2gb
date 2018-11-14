@@ -1,7 +1,5 @@
-img2gb
-======
-
-| Converts images to GameBoy tiles
+img2gb - Converts Images to GameBoy Tileset
+===========================================
 
 .. image:: ./banner.png
 
@@ -11,6 +9,12 @@ Dependencies
 
 * Python 2.7 / 3.5
 * Pillow
+
+
+Install
+-------
+
+TODO
 
 
 Usage

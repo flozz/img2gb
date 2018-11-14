@@ -13,7 +13,7 @@ if os.path.isfile("README.rst"):
 setup(
     name="img2gb",
     version="0.0.0",
-    description="Converts images to GameBoy tiles",
+    description="Converts images to GameBoy tileset",
     url="",
     license="BSD-3-Clause",
 
