@@ -25,7 +25,7 @@ class GBTilemap(object):
 
     def __init__(self, width=32, height=32, gbtileset=None):
         self.tileset = gbtileset if gbtileset else GBTileset()
-        self.map = [0x00] * width * height
+        self.map = [0x00] * int(width * height)
         self.width = width
         self.height = height
 
@@ -38,7 +38,7 @@ class GBTilemap(object):
             raise ValueError("The y coordinate is greater than the height of the tilemap")  # noqa
 
         tile_id = self.tileset.add_tile(gbtile, dedup)
-        index = y * self.width + x
+        index = int(y * self.width + x)
 
         self.map[index] = tile_id
 
