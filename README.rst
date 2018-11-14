@@ -14,7 +14,34 @@ Dependencies
 Install
 -------
 
-TODO
+From Sources
+~~~~~~~~~~~~
+
+Clone this repository::
+
+    git clone https://github.com/flozz/img2gb.git
+
+Go the the project repository::
+
+    cd img2gb
+
+Then install the software (as root)::
+
+    python setup.py install
+
+
+From PYPI
+~~~~~~~~~
+
+Run the following command (as root)::
+
+    pip install img2gb
+
+
+Windows Binary
+~~~~~~~~~~~~~~
+
+Will be available soon ;)
 
 
 Usage
@@ -91,4 +118,5 @@ tilset.c (truncated)::
 Changelog
 ---------
 
-TODO
+* **0.9.0:** Initial release (generates tiles, tilesets and tilemaps)
+
