@@ -41,7 +41,13 @@ Run the following command (as root)::
 Windows Binary
 ~~~~~~~~~~~~~~
 
-Will be available soon ;)
+Download the binary:
+
+* https://github.com/flozz/img2gb/releases/download/v0.9.1/img2gb.exe
+
+and use it from command line::
+
+    img2gb.exe -h
 
 
 Usage
