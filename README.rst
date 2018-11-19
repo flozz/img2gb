@@ -121,6 +121,12 @@ tilset.c (truncated)::
     };
 
 
+Links
+-----
+
+* Article about the tile encoding and img2gb: https://blog.flozz.fr/2018/11/19/developpement-gameboy-5-creer-des-tilesets/ (French)
+
+
 Changelog
 ---------
 
