@@ -1,12 +1,14 @@
 from .gbtile import GBTile
 from .gbtileset import GBTileset
+from .helpers import to_pil_rgb_image
 
 
 class GBTilemap(object):
 
     @classmethod
     def from_image(Cls, pil_image, gbtileset=None, dedup=True):
-        width, height = pil_image.size
+        image = to_pil_rgb_image(pil_image)
+        width, height = image.size
 
         if width % 8 or height % 8:
             raise ValueError("The input image width and height must be a multiple of 8")  # noqa
@@ -18,7 +20,7 @@ class GBTilemap(object):
 
         for tile_y in range(0, height, 8):
             for tile_x in range(0, width, 8):
-                tile = GBTile.from_image(pil_image, tile_x, tile_y)
+                tile = GBTile.from_image(image, tile_x, tile_y)
                 tilemap.put_tile(tile_x / 8, tile_y / 8, tile, dedup=dedup)
 
         return tilemap
