@@ -6,3 +6,4 @@ Python API
    :caption: Contents:
 
    ./gbtile.rst
+   ./gbtileset.rst
