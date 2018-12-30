@@ -28,10 +28,7 @@ from .helpers import (
 
 
 class GBTile(object):
-    """Stores and manipulates data of a single GameBoy tile (8x8 pixels).
-
-    :var list data: Raw data of the tile (list of int).
-    """
+    """Stores and manipulates data of a single GameBoy tile (8x8 pixels)."""
 
     @classmethod
     def from_image(Cls, pil_image, tile_x=0, tile_y=0):
@@ -58,7 +55,15 @@ class GBTile(object):
         return tile
 
     def __init__(self):
-        self.data = [0x00] * 16
+        self._data = [0x00] * 16
+
+    @property
+    def data(self):
+        """Raw data of the tile.
+
+        :type: list of int
+        """
+        return self._data
 
     def put_pixel(self, x, y, color_id):
         """Set the color of one of the tile's pixels.
@@ -72,19 +77,23 @@ class GBTile(object):
         mask2 = mask if color_id & 0b10 else 0b00000000
 
         # Clear changing bits
-        self.data[y*2+0] &= ~mask
-        self.data[y*2+1] &= ~mask
+        self._data[y*2+0] &= ~mask
+        self._data[y*2+1] &= ~mask
 
         # Set bits
-        self.data[y*2+0] |= mask1
-        self.data[y*2+1] |= mask2
+        self._data[y*2+0] |= mask1
+        self._data[y*2+1] |= mask2
 
     def to_hex_string(self):
         """Returns the tile as an hexadecimal-encoded string.
 
         :rtype: str
+
+        e.g.::
+
+            "04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66"
         """
-        return " ".join(["%02X" % b for b in self.data])
+        return " ".join(["%02X" % b for b in self._data])
 
     def __eq__(self, other):
         if not isinstance(other, GBTile):

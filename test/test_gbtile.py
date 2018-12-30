@@ -59,3 +59,12 @@ class Test_GBTile(object):
         tile2.put_pixel(0, 0, 3)
 
         assert tile1 == tile2
+
+    def test_data(self):
+        tile = GBTile()
+        assert len(tile.data) == 16
+        assert tile.data[0] == 0x00
+        assert tile.data[1] == 0x00
+        tile.put_pixel(0, 0, 3)
+        assert tile.data[0] == 0x80
+        assert tile.data[1] == 0x80
