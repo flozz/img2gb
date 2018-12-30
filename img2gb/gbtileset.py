@@ -59,7 +59,34 @@ class GBTileset(object):
         return tileset
 
     def __init__(self):
-        self.tiles = []
+        self._tiles = []
+
+    @property
+    def length(self):
+        """Number of tiles in the tileset.
+
+        :type: int
+        """
+        return len(self._tiles)
+
+    @property
+    def data(self):
+        """Raw data of the tiles in the tileset.
+
+        :type: list of int
+        """
+        data = []
+        for tile in self._tiles:
+            data += tile.data
+        return data
+
+    @property
+    def tiles(self):
+        """Tiles of the tileset.
+
+        :type: GBTile
+        """
+        return self._tiles
 
     def add_tile(self, gbtile, dedup=False):
         """Adds a tile to the tileset.
@@ -72,32 +99,25 @@ class GBTileset(object):
         :rtype: int
         :returns: The id of the tile in the tileset.
         """
-        if dedup and gbtile in self.tiles:
-            return self.tiles.index(gbtile)
+        if dedup and gbtile in self._tiles:
+            return self._tiles.index(gbtile)
         # TODO check tile count <= 255
-        self.tiles.append(gbtile)
-        return len(self.tiles) - 1
+        self._tiles.append(gbtile)
+        return len(self._tiles) - 1
 
     def to_hex_string(self):
         """Returns the tileset as an hexadecimal-encoded string (one tile per
         line).
 
         :rtype: str
+
+        e.g.::
+
+            '''00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+            FF 01 81 7F BD 7F A5 7B A5 7B BD 63 81 7F FF FF
+            7E 00 81 7F 81 7F 81 7F 81 7F 81 7F 81 7F 7E 7E
+            3C 00 54 2A A3 5F C1 3F 83 7F C5 3F 2A 7E 3C 3C
+            04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66'''
+
         """
-        result = ""
-        for tile in self.tiles:
-            result += "%s\n" % tile.to_hex_string()
-        return result
-
-    @property
-    def length(self):
-        """Number of tiles in the tileset."""
-        return len(self.tiles)
-
-    @property
-    def data(self):
-        """Raw data of the tiles in the tileset (list of int)."""
-        data = []
-        for tile in self.tiles:
-            data += tile.data
-        return data
+        return "\n".join([tile.to_hex_string() for tile in self._tiles])
