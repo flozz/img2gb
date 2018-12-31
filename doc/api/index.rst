@@ -7,3 +7,4 @@ Python API
 
    ./gbtile.rst
    ./gbtileset.rst
+   ./gbtilemap.rst

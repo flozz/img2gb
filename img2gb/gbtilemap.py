@@ -1,3 +1,34 @@
+"""
+The :class:`GBTilemap` class represents a GameBoy tilemap. It can map up to
+32x32 tiles that are stored in a :class:`GBTileset` (if not given, a new empty
+tileset is created.
+
+Creating a new tilemap::
+
+    from img2gb import GBTilemap, GBTileset, GBTile
+
+    tileset = GBTileset()
+    tilemap = GBTilemap(
+            width=32,
+            height=32,
+            gbtileset=tilset
+            )
+
+    tile = GBTile()  # blank tile
+
+    tilemap.put_tile(0, 0, tile)  # The tile will be added in the tileset
+
+
+Creating a tilemap from an image::
+
+    from img2gb import GBTilemap
+    from PIL import Image
+
+    image = Image.open("./my_tilemap.png")
+    tilemap = tilemap.from_image(image)
+"""
+
+
 from .gbtile import GBTile
 from .gbtileset import GBTileset
 from .helpers import to_pil_rgb_image
@@ -5,8 +36,22 @@ from .helpers import to_pil_rgb_image
 
 class GBTilemap(object):
 
+    """Stores and manipulates GameBoy tilemaps.
+
+    :param int width: With of the tilemap in tile (0-32, default = ``32``).
+    :param int height: Height of the tilemap in tile (0-32, default = ``32``).
+    :param GBTileset gbtileset: The tileset to use (a new empty one will be
+                                created if set to ``None``, default =
+                                ``None``).
+    """
+
     @classmethod
     def from_image(Cls, pil_image, gbtileset=None, dedup=True):
+        """Generates the tilemap from the given image. The tileset can also be
+        generated at the same time.
+
+        TODO This API will change, so it will be decumented later...
+        """
         image = to_pil_rgb_image(pil_image)
         width, height = image.size
 
@@ -26,38 +71,84 @@ class GBTilemap(object):
         return tilemap
 
     def __init__(self, width=32, height=32, gbtileset=None):
-        self.tileset = gbtileset if gbtileset else GBTileset()
-        self.map = [0x00] * int(width * height)
-        self.width = width
-        self.height = height
+        self._tileset = gbtileset if gbtileset else GBTileset()
+        self._map = [0x00] * int(width * height)
+        self._width = width
+        self._height = height
 
-    def put_tile(self, x, y, gbtile, dedup=True):
-        if x < 0 or y < 0:
-            raise ValueError("x and y coordinates cannot be negative")
-        if x >= self.width:
-            raise ValueError("The x coordinate is greater than the width of the tilemap")  # noqa
-        if y >= self.height:
-            raise ValueError("The y coordinate is greater than the height of the tilemap")  # noqa
+    @property
+    def tileset(self):
+        """The tileset that contains the tiles used by the tilemap.
 
-        tile_id = self.tileset.add_tile(gbtile, dedup)
-        index = int(y * self.width + x)
+        :type: GBTileset
+        """
+        return self._tileset
 
-        self.map[index] = tile_id
+    @property
+    def width(self):
+        """The width of the tilemap.
 
-    def to_hex_string(self):
-        result = ""
-        for index in range(len(self.map)):
-            tile_id = self.map[index]
-            result += "%02X " % tile_id
-            if (index + 1) % self.width == 0:
-                result += "\n"
-        return result
+        :type: int
+        """
+        return self._width
+
+    @property
+    def height(self):
+        """The height of the tilemap.
+
+        :type: int
+        """
+        return self._height
 
     @property
     def size(self):
-        return self.width, self.height
+        """The with and height of the tilemap.
+
+        :type: tuple of two int ``(width, height)``
+        """
+        return self._width, self._height
 
     @property
     def data(self):
-        return self.map
-        # return [self.tileset.tiles.index(t) if t in self.tileset.tiles else 0 for t in self.map]  # noqa
+        """Raw data of the tilemap.
+
+        :type: list of int
+        """
+        return self._map
+
+    def put_tile(self, x, y, gbtile, dedup=True):
+        """Put a tile at the given position in the tilemap.
+
+        TODO This API will change, so it will be decumented later...
+        """
+        if x < 0 or y < 0:
+            raise ValueError("x and y coordinates cannot be negative")
+        if x >= self._width:
+            raise ValueError("The x coordinate is greater than the width of the tilemap")  # noqa
+        if y >= self._height:
+            raise ValueError("The y coordinate is greater than the height of the tilemap")  # noqa
+
+        tile_id = self._tileset.add_tile(gbtile, dedup)
+        index = int(y * self._width + x)
+
+        self._map[index] = tile_id
+
+    def to_hex_string(self):
+        """Returns the tilemap as an hexadecimal-encoded string.
+
+        :rtype: str
+
+        e.g. (4x4 tiles)::
+
+            00 00 00 00
+            00 01 02 00
+            00 03 04 00
+            00 00 00 00
+        """
+        result = ""
+        for index in range(len(self._map)):
+            tile_id = self._map[index]
+            result += "%02X " % tile_id
+            if (index + 1) % self._width == 0:
+                result += "\n"
+        return result

@@ -1,5 +1,5 @@
 """
-The :class:`GBTileset` represents a GameBoy tileset. It is composed of
+The :class:`GBTileset` class represents a GameBoy tileset. It is composed of
 :class:`GBTile` (up to 255 tiles).
 
 Creating a tileset from scratch::
