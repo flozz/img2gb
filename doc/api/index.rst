@@ -5,6 +5,7 @@ Python API
    :maxdepth: 2
    :caption: Contents:
 
+   ./high-level-functions.rst
    ./gbtile.rst
    ./gbtileset.rst
    ./gbtilemap.rst
