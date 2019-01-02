@@ -148,7 +148,9 @@ class GBTilemap(object):
         result = ""
         for index in range(len(self._map)):
             tile_id = self._map[index]
-            result += "%02X " % tile_id
+            result += "%02X" % tile_id
             if (index + 1) % self._width == 0:
                 result += "\n"
-        return result
+            else:
+                result += " "
+        return result.strip()
