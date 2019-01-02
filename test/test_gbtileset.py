@@ -11,6 +11,10 @@ class Test_GBTileset(object):
         return Image.open("./test/assets/tileset.png")
 
     @pytest.fixture
+    def image2(self):
+        return Image.open("./test/assets/tilemap.png")
+
+    @pytest.fixture
     def tile1(self):
         return GBTile()
 
@@ -29,6 +33,14 @@ class Test_GBTileset(object):
         result += "3C 00 54 2A A3 5F C1 3F 83 7F C5 3F 2A 7E 3C 3C\n"
         result += "04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66"
         assert tileset.to_hex_string() == result
+
+    @pytest.mark.parametrize("dedup,count", [
+        (False, 64),
+        (True,   4)
+        ])
+    def test_from_image_dedup(self, image2, dedup, count):
+        tileset = GBTileset.from_image(image2, dedup=dedup)
+        assert tileset.length == count
 
     def test_add_tile(self, tile1):
         tileset = GBTileset()

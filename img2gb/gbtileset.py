@@ -30,10 +30,12 @@ class GBTileset(object):
     """Stores and manipulate a GameBoy tileset (up to 255 tiles)."""
 
     @classmethod
-    def from_image(Cls, pil_image):
+    def from_image(Cls, pil_image, dedup=False):
         """Create a new GBTileset from the given image.
 
         :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.
+        :param bool dedup: If ``True``, deduplicate the tiles (default =
+                           ``False``).
         :rtype: GBTileset
 
         .. NOTE::
@@ -54,7 +56,7 @@ class GBTileset(object):
         for tile_y in range(0, height, 8):
             for tile_x in range(0, width, 8):
                 tile = GBTile.from_image(image, tile_x, tile_y)
-                tileset.add_tile(tile)
+                tileset.add_tile(tile, dedup=dedup)
 
         return tileset
 
