@@ -9,3 +9,4 @@ Python API
    ./gbtile.rst
    ./gbtileset.rst
    ./gbtilemap.rst
+   ./c_export.rst

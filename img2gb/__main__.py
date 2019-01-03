@@ -9,7 +9,11 @@ from .export import tileset_to_c, tileset_to_h
 
 def main(argv=sys.argv):
     args = parse_cli(argv[1:])
-    raise NotImplementedError()
+
+    if args.subcommand == "tileset":
+        pass
+    else:
+        raise NotImplementedError()
     # image = Image.open(args.image)
     # tilemap = GBTilemap.from_image(image, dedup=args.deduplicate)
     # tileset = tilemap.tileset

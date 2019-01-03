@@ -1,6 +1,9 @@
+import os.path
+
 from .gbtile import GBTile
 from .gbtileset import GBTileset
 from .gbtilemap import GBTilemap
+from .c_export import generate_c_file, generate_c_header_file
 
 
 def generate_tileset(
@@ -80,7 +83,26 @@ def generate_tileset(
         c_code = c_code_io.read()
         print(c_code)
     """
-    raise NotImplementedError()
+    if alternative_palette:
+        raise NotImplementedError()  # TODO
+
+    tileset = GBTileset.from_image(input_image, dedup=dedup)
+
+    if output_c:
+        c_code = generate_c_file(tileset.to_c_string(name=name))
+        output_c.write(c_code)
+
+    if output_h:
+        filename = "%s.h" % name.lower()
+        if hasattr(output_h, "name"):
+            filename = os.path.basename(output_h.name)
+        h_code = generate_c_header_file(
+                tileset.to_c_header_string(name=name),
+                filename=filename)
+        output_h.write(h_code)
+
+    if output_image:
+        raise NotImplementedError()  # TODO
 
 
 def generate_tilemap(
