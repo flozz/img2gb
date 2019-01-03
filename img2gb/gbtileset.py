@@ -115,11 +115,57 @@ class GBTileset(object):
 
         e.g.::
 
-            '''00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+            00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
             FF 01 81 7F BD 7F A5 7B A5 7B BD 63 81 7F FF FF
             7E 00 81 7F 81 7F 81 7F 81 7F 81 7F 81 7F 7E 7E
             3C 00 54 2A A3 5F C1 3F 83 7F C5 3F 2A 7E 3C 3C
-            04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66'''
+            04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66
 
         """
         return "\n".join([tile.to_hex_string() for tile in self._tiles])
+
+    def to_c_string(self, name="TILESET"):
+        """Returns C code that represents the data of the tileset.
+
+        :param str name: The name of the variable in the generated code (always
+                converted to uppercase in the generated code, default =
+                ``"TILESET"``)
+
+        :rtype: str
+
+        Example:
+
+        .. code-block:: C
+
+            const UINT8 TILESET[] = {
+                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0xFF, 0x01, 0x81, 0x7F, 0xBD, 0x7F, 0xA5, 0x7B, 0xA5, 0x7B, 0xBD, 0x63, 0x81, 0x7F, 0xFF, 0xFF,
+                0x7E, 0x00, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x7E, 0x7E,
+                0x3C, 0x00, 0x54, 0x2A, 0xA3, 0x5F, 0xC1, 0x3F, 0x83, 0x7F, 0xC5, 0x3F, 0x2A, 0x7E, 0x3C, 0x3C,
+                0x04, 0x04, 0x04, 0x04, 0x0A, 0x0A, 0x12, 0x12, 0x66, 0x00, 0x99, 0x77, 0x99, 0x77, 0x66, 0x66,
+            };
+        """  # noqa
+        c = "const UINT8 %s[] = {\n" % name.upper()
+        for tile in self._tiles:
+            c += "    %s,\n" % ", ".join(["0x%02X" % b for b in tile.data])
+        c += "};"
+        return c
+
+    def to_c_header_string(self, name="TILESET"):
+        """Returns the C header (.h) code for the given tileset
+
+        :param str name: The name of the variable in the generated code (always
+                converted to uppercase in the generated code, default =
+                ``"TILESET"``)
+        :rtype: str
+
+        Example:
+
+        .. code-block:: C
+
+            extern const UINT8 TILESET[];
+            define TILESET_TILE_COUNT 5
+        """
+        result = "extern const UINT8 %s[];\n" % name.upper()
+        result += "#define %s_TILE_COUNT %i" % (name.upper(), self.length)
+        return result

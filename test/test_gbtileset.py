@@ -84,3 +84,32 @@ class Test_GBTileset(object):
         tileset.add_tile(tile1)
         assert len(tileset.tiles) == 2
         assert tileset.tiles[1] == tile1
+
+    def test_to_c_string(self, image):
+        tileset = GBTileset.from_image(image)
+        result = "const UINT8 TILESET[] = {\n"
+        result += "    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\n"  # noqa
+        result += "    0xFF, 0x01, 0x81, 0x7F, 0xBD, 0x7F, 0xA5, 0x7B, 0xA5, 0x7B, 0xBD, 0x63, 0x81, 0x7F, 0xFF, 0xFF,\n"  # noqa
+        result += "    0x7E, 0x00, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x7E, 0x7E,\n"  # noqa
+        result += "    0x3C, 0x00, 0x54, 0x2A, 0xA3, 0x5F, 0xC1, 0x3F, 0x83, 0x7F, 0xC5, 0x3F, 0x2A, 0x7E, 0x3C, 0x3C,\n"  # noqa
+        result += "    0x04, 0x04, 0x04, 0x04, 0x0A, 0x0A, 0x12, 0x12, 0x66, 0x00, 0x99, 0x77, 0x99, 0x77, 0x66, 0x66,\n"  # noqa
+        result += "};"
+        assert tileset.to_c_string() == result
+
+    def test_to_c_string_with_custom_name(self):
+        tileset = GBTileset()
+        assert tileset.to_c_string(name="Foo") == "const UINT8 FOO[] = {\n};"
+
+    def test_to_c_header_string(self, image):
+        tileset = GBTileset.from_image(image)
+        result = ""
+        result += "extern const UINT8 TILESET[];\n"
+        result += "#define TILESET_TILE_COUNT 5"
+        assert tileset.to_c_header_string() == result
+
+    def test_to_c_header_string_with_custom_name(self, image):
+        tileset = GBTileset.from_image(image)
+        result = ""
+        result += "extern const UINT8 FOO[];\n"
+        result += "#define FOO_TILE_COUNT 5"
+        assert tileset.to_c_header_string(name="Foo") == result
