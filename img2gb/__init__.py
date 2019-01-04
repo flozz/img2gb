@@ -17,7 +17,7 @@ def generate_tileset(
     """Function that generates tileset's C file, C header and image from an
     input image.
 
-    :param PIL.Image.Image input_images|list: The input image to generate the
+    :param PIL.Image.Image|list input_images: The input image to generate the
             tileset from.
     :param file output_c: A file-like object where the C code will be generated
             (``None`` to not generate C code).
