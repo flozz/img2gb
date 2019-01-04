@@ -36,6 +36,13 @@ class Test_GBTile(object):
         assert tile.data[0] == 0x80
         assert tile.data[1] == 0x88
 
+    def test_get_pixel(self, image):
+        tile = GBTile.from_image(image, 32)
+        assert tile.get_pixel(0, 0) == 0b00
+        assert tile.get_pixel(0, 6) == 0b01
+        assert tile.get_pixel(2, 6) == 0b10
+        assert tile.get_pixel(5, 0) == 0b11
+
     def test_to_hex_string(self):
         tile = GBTile()
 
@@ -45,6 +52,14 @@ class Test_GBTile(object):
         tile.put_pixel(1, 0, 3)
 
         assert tile.to_hex_string() == "C0 C0 00 00 00 00 00 00 00 00 00 00 00 00 00 00"  # noqa
+
+    def test_to_image(self, image):
+        tile = GBTile.from_image(image, 32)
+        tile_image = tile.to_image()
+        assert tile_image.getpixel((0, 0)) == 0b00
+        assert tile_image.getpixel((0, 6)) == 0b01
+        assert tile_image.getpixel((2, 6)) == 0b10
+        assert tile_image.getpixel((5, 0)) == 0b11
 
     def test_gbtile_equality(self):
         tile1 = GBTile()

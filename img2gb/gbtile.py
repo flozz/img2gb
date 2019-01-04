@@ -21,6 +21,8 @@ Creating a tile from a PIL image::
 """
 
 
+from PIL import Image
+
 from .helpers import (
         to_pil_rgb_image,
         rgba_brightness,
@@ -84,6 +86,18 @@ class GBTile(object):
         self._data[y*2+0] |= mask1
         self._data[y*2+1] |= mask2
 
+    def get_pixel(self, x, y):
+        """Returns the color id of a pixel of the tile.
+
+        :param int x: The x coordinate of the pixel (0-7).
+        :param int y: The y coordinate of the pixel (0-7).
+        :rtype: int
+        """
+        mask = 0b00000001 << (7 - x)
+        lbit = (self._data[y*2+0] & mask) >> (7 - x)
+        hbit = (self._data[y*2+1] & mask) >> (7 - x)
+        return hbit * 0b10 + lbit
+
     def to_hex_string(self):
         """Returns the tile as an hexadecimal-encoded string.
 
@@ -94,6 +108,24 @@ class GBTile(object):
             "04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66"
         """
         return " ".join(["%02X" % b for b in self._data])
+
+    def to_image(self):
+        """Generates a PIL image from the tile. The generated image is an
+        indexed image with a 4 shades of gray palette.
+
+        :rtype: PIL.Image.Image
+        """
+        image = Image.new("P", (8, 8), 0)
+        image.putpalette([
+                0xFF, 0xFF, 0xFF,
+                0xBB, 0xBB, 0xBB,
+                0x55, 0x55, 0x55,
+                0x00, 0x00, 0x00,
+                ])
+        for y in range(8):
+            for x in range(8):
+                image.putpixel((x, y), self.get_pixel(x, y))
+        return image
 
     def __eq__(self, other):
         if not isinstance(other, GBTile):
