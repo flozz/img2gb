@@ -111,7 +111,7 @@ class GBTileset(object):
         """Merge the tiles of the given tileset in the current tileset.
 
         :param GBTileset gbtileset: The tileset to merge into the current one.
-        :param bool dedul: Add only the tiles that are note already present in
+        :param bool dedup: Add only the tiles that are note already present in
                 the current tileset (default = ``False``).
         """
         for tile in gbtileset.tiles:
