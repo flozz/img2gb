@@ -7,7 +7,7 @@ from .c_export import generate_c_file, generate_c_header_file
 
 
 def generate_tileset(
-        input_image,
+        input_images,
         output_c=None,
         output_h=None,
         output_image=None,
@@ -17,8 +17,8 @@ def generate_tileset(
     """Function that generates tileset's C file, C header and image from an
     input image.
 
-    :param PIL.Image.Image input_image: The input image to generate the tileset
-            from.
+    :param PIL.Image.Image input_images|list: The input image to generate the
+            tileset from.
     :param file output_c: A file-like object where the C code will be generated
             (``None`` to not generate C code).
     :param file output_h: A file-like object where the C header (.h) code will
@@ -50,7 +50,7 @@ def generate_tileset(
         image_file = open("example.png", "wb")
 
         img2gb.generate_tileset(
-            image,
+            [image],
             output_c=c_file,
             output_h=h_file,
             output_image=image_file,
@@ -72,7 +72,7 @@ def generate_tileset(
         output_image = BytesIO()
 
         img2gb.generate_tileset(
-            image,
+            [image],
             output_c=c_code_io,
             output_h=h_code_io,
             output_image=output_image,
@@ -86,7 +86,12 @@ def generate_tileset(
     if alternative_palette:
         raise NotImplementedError()  # TODO
 
-    tileset = GBTileset.from_image(input_image, dedup=dedup)
+    if type(input_images) is not list:
+        tileset = GBTileset.from_image(input_images, dedup=dedup)
+    else:
+        tileset = GBTileset()
+        for image in input_images:
+            tileset.merge(GBTileset.from_image(image), dedup=dedup)
 
     if output_c:
         c_code = generate_c_file(tileset.to_c_string(name=name))

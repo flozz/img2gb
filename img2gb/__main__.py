@@ -3,15 +3,23 @@ import sys
 from PIL import Image
 
 from .cli import parse_cli
-from .gbtilemap import GBTilemap
-from .export import tileset_to_c, tileset_to_h
+from . import generate_tileset, generate_tilemap
 
 
 def main(argv=sys.argv):
     args = parse_cli(argv[1:])
 
     if args.subcommand == "tileset":
-        pass
+        images = [Image.open(image) for image in args.image]
+        generate_tileset(
+                images,
+                output_c=args.output_c_file,
+                output_h=args.output_header_file,
+                output_image=args.output_image,
+                name=args.name,
+                dedup=args.deduplicate,
+                alternative_palette=args.alternative_palette
+                )
     else:
         raise NotImplementedError()
     # image = Image.open(args.image)
