@@ -113,3 +113,15 @@ class Test_GBTileset(object):
         result += "extern const UINT8 FOO[];\n"
         result += "#define FOO_TILE_COUNT 5"
         assert tileset.to_c_header_string(name="Foo") == result
+
+    def test_merge(self, image):
+        tileset1 = GBTileset.from_image(image)
+        tileset2 = GBTileset.from_image(image)
+        tileset1.merge(tileset2)
+        assert tileset1.length == 10
+
+    def test_merge_with_dedup(self, image):
+        tileset1 = GBTileset.from_image(image)
+        tileset2 = GBTileset.from_image(image)
+        tileset1.merge(tileset2, dedup=True)
+        assert tileset1.length == 5

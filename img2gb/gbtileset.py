@@ -107,6 +107,16 @@ class GBTileset(object):
         self._tiles.append(gbtile)
         return len(self._tiles) - 1
 
+    def merge(self, gbtileset, dedup=False):
+        """Merge the tiles of the given tileset in the current tileset.
+
+        :param GBTileset gbtileset: The tileset to merge into the current one.
+        :param bool dedul: Add only the tiles that are note already present in
+                the current tileset (default = ``False``).
+        """
+        for tile in gbtileset.tiles:
+            self.add_tile(tile, dedup=dedup)
+
     def to_hex_string(self):
         """Returns the tileset as an hexadecimal-encoded string (one tile per
         line).
