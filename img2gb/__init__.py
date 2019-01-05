@@ -107,7 +107,8 @@ def generate_tileset(
         output_h.write(h_code)
 
     if output_image:
-        raise NotImplementedError()  # TODO
+        image = tileset.to_image()
+        image.save(output_image, "PNG")
 
 
 def generate_tilemap(
