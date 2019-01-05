@@ -22,6 +22,8 @@ Creating a tileset from a PIL image::
 """
 
 
+from PIL import Image
+
 from .gbtile import GBTile
 from .helpers import to_pil_rgb_image
 
@@ -179,3 +181,32 @@ class GBTileset(object):
         result = "extern const UINT8 %s[];\n" % name.upper()
         result += "#define %s_TILE_COUNT %i" % (name.upper(), self.length)
         return result
+
+    def to_image(self):
+        """Generates a PIL image from the tileset. The generated image is an
+        indexed image with a 4 shades of gray palette.
+
+        :rtype: PIL.Image.Image
+        """
+        if self.length <= 16:
+            width = self.length * 8
+            height = 1 * 8
+        else:
+            width = 16 * 8
+            height = (self.length // 16 + bool(self.length % 16)) * 8
+
+        image = Image.new("P", (width, height))
+        image.putpalette([
+                0xFF, 0xFF, 0xFF,
+                0xBB, 0xBB, 0xBB,
+                0x55, 0x55, 0x55,
+                0x00, 0x00, 0x00,
+                ])
+
+        for i in range(self.length):
+            tile_image = self._tiles[i].to_image()
+            x = (i*8) % width
+            y = (i*8) // width * 8
+            image.paste(tile_image, (x, y))
+
+        return image

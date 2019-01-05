@@ -107,6 +107,12 @@ class Test_GBTileset(object):
         result += "#define TILESET_TILE_COUNT 5"
         assert tileset.to_c_header_string() == result
 
+    def test_to_image(self, image2):
+        tileset = GBTileset.from_image(image2, dedup=True)
+        tileset_image = tileset.to_image()
+        assert tileset_image.width == 32
+        assert tileset_image.height == 8
+
     def test_to_c_header_string_with_custom_name(self, image):
         tileset = GBTileset.from_image(image)
         result = ""
