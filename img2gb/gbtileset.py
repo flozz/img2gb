@@ -164,7 +164,7 @@ class GBTileset(object):
         return c
 
     def to_c_header_string(self, name="TILESET"):
-        """Returns the C header (.h) code for the given tileset
+        """Returns the C header (.h) code for the tileset.
 
         :param str name: The name of the variable in the generated code (always
                 converted to uppercase in the generated code, default =

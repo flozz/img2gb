@@ -32,6 +32,49 @@ class Test_GBTilemap(object):
         tilemap.put_tile(0, 0, tileset.tiles[4])
         assert tilemap.data[0] == 4
 
+    @pytest.mark.parametrize("x,y", [
+        (-1, 0),
+        (0, -1),
+        (8, 0),
+        (0, 8),
+        ])
+    def test_put_tile_with_out_of_map_coord(self, tile, x, y):
+        tilemap = GBTilemap(width=8, height=8)
+        with pytest.raises(ValueError):
+            tilemap.put_tile(x, y, tile)
+
+    def test_put_tile_with_missing_append(self, tile):
+        tilemap = GBTilemap()
+        tilemap.put_tile(0, 0, tile, missing="append")
+        assert tilemap.tileset.length == 1
+
+    def test_put_tile_with_missing_error(self, tile):
+        tilemap = GBTilemap()
+        with pytest.raises(ValueError):
+            tilemap.put_tile(0, 0, tile, missing="error")
+
+    def test_put_tile_with_missing_replace(self, tile):
+        tilemap = GBTilemap()
+        tilemap.put_tile(0, 0, tile, missing="replace", replace=42)
+        assert tilemap.data[0] == 42
+
+    def test_put_tile_with_missing_set_to_wrong_value(self, tile):
+        tilemap = GBTilemap()
+        with pytest.raises(ValueError):
+            tilemap.put_tile(0, 0, tile, missing="foo")
+
+    def test_put_tile_with_missing_append_and_dedup_true(self, tile):
+        tilemap = GBTilemap()
+        tilemap.put_tile(0, 0, tile, missing="append", dedup=True)
+        tilemap.put_tile(0, 0, tile, missing="append", dedup=True)
+        assert tilemap.tileset.length == 1
+
+    def test_put_tile_with_missing_append_and_dedup_false(self, tile):
+        tilemap = GBTilemap()
+        tilemap.put_tile(0, 0, tile, missing="append", dedup=False)
+        tilemap.put_tile(0, 0, tile, missing="append", dedup=False)
+        assert tilemap.tileset.length == 2
+
     def test_to_hex_string(self, tileset):
         tilemap = GBTilemap(width=2, height=2)
         tilemap.put_tile(0, 0, tileset.tiles[0])

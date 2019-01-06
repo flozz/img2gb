@@ -116,10 +116,23 @@ class GBTilemap(object):
         """
         return self._map
 
-    def put_tile(self, x, y, gbtile, dedup=True):
+    def put_tile(self, x, y, gbtile, missing="append", replace=0, dedup=True):
         """Put a tile at the given position in the tilemap.
 
-        TODO This API will change, so it will be decumented later...
+        :param int x: The x coordinate where to put the tile in the tilemap.
+        :param int y: The y coordinate where to put the tile in the tilemap.
+        :param GBTile gbtile: The tile to put in the tilemap.
+        :param str missing: What to do if a tile is missing from the tileset:
+
+                * ``"append"`` (default): append the tile to the tileset,
+                * ``"error"``: raise an error,
+                * ``"replace"``: relpace by an other tile (see the ``replace``
+                  argument).
+
+        :param int replace: The id of the replacement tile when
+                ``missing="replace"``.
+        :param bool dedup: Deduplicate tiles when ``missing="append"`` (default
+                = ``True``).
         """
         if x < 0 or y < 0:
             raise ValueError("x and y coordinates cannot be negative")
@@ -128,9 +141,20 @@ class GBTilemap(object):
         if y >= self._height:
             raise ValueError("The y coordinate is greater than the height of the tilemap")  # noqa
 
-        tile_id = self._tileset.add_tile(gbtile, dedup)
-        index = int(y * self._width + x)
+        if missing not in ("append", "error", "replace"):
+            raise ValueError("Wrong value '%s' for the missing argument. Authorised values are 'append', 'error' and 'replace'.")  # noqa
 
+        if gbtile in self._tileset.tiles and dedup:
+            tile_id = self._tileset.tiles.index(gbtile)
+        else:
+            if missing == "append":
+                tile_id = self._tileset.add_tile(gbtile, dedup=dedup)
+            elif missing == "error":
+                raise ValueError("The given tile is missing from the tileset.")
+            elif missing == "replace":
+                tile_id = replace
+
+        index = int(y * self._width + x)
         self._map[index] = tile_id
 
     def to_hex_string(self):
