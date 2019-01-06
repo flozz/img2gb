@@ -206,3 +206,38 @@ class GBTilemap(object):
             else:
                 result += " "
         return result.strip()
+
+    def to_c_string(self, name="TILEMAP"):
+        """Returns C code that represents the tilemap.
+
+        :param str name: The name of the variable in the generated code (always
+                converted to uppercase in the generated code, default =
+                ``"TILEMAP"``)
+
+        :rtype: str
+        """
+        c = "const UINT8 %s[] = {\n" % name.upper()
+        for index in range(len(self._map)):
+            if index % self._width == 0:
+                c += "    "
+            tile_id = self._map[index]
+            c += "0x%02X," % tile_id
+            if (index + 1) % self._width == 0:
+                c += "\n"
+            else:
+                c += " "
+        c += "};"
+        return c
+
+    def to_c_header_string(self, name="TILEMAP"):
+        """Returns the C header (.h) code for the tilemap.
+
+        :param str name: The name of the variable in the generated code (always
+                converted to uppercase in the generated code, default =
+                ``"TILEMAP"``)
+        :rtype: str
+        """
+        h = "extern const UINT8 %s[];\n" % name.upper()
+        h += "#define %s_WIDTH %i\n" % (name.upper(), self._width)
+        h += "#define %s_HEIGHT %i" % (name.upper(), self._height)
+        return h

@@ -86,6 +86,40 @@ class Test_GBTilemap(object):
         result += "02 03"
         assert tilemap.to_hex_string() == result
 
+    def test_to_c_string(self):
+        tilemap = GBTilemap(width=4, height=4)
+        result = "const UINT8 TILEMAP[] = {\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "};"
+        assert tilemap.to_c_string() == result
+
+    def test_to_c_string_with_custom_name(self):
+        tilemap = GBTilemap(width=4, height=4)
+        result = "const UINT8 FOO[] = {\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "    0x00, 0x00, 0x00, 0x00,\n"
+        result += "};"
+        assert tilemap.to_c_string(name="Foo") == result
+
+    def test_to_c_header_string(self):
+        tilemap = GBTilemap(width=4, height=4)
+        result = "extern const UINT8 TILEMAP[];\n"
+        result += "#define TILEMAP_WIDTH 4\n"
+        result += "#define TILEMAP_HEIGHT 4"
+        assert tilemap.to_c_header_string() == result
+
+    def test_to_c_header_string_with_custom_name(self):
+        tilemap = GBTilemap(width=4, height=4)
+        result = "extern const UINT8 FOO[];\n"
+        result += "#define FOO_WIDTH 4\n"
+        result += "#define FOO_HEIGHT 4"
+        assert tilemap.to_c_header_string(name="Foo") == result
+
     def test_tileset(self):
         tilemap = GBTilemap()
         assert type(tilemap.tileset) is GBTileset
