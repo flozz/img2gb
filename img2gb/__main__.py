@@ -20,16 +20,19 @@ def main(argv=sys.argv):
                 dedup=args.deduplicate,
                 alternative_palette=args.alternative_palette
                 )
-    else:
-        raise NotImplementedError()
-    # image = Image.open(args.image)
-    # tilemap = GBTilemap.from_image(image, dedup=args.deduplicate)
-    # tileset = tilemap.tileset
-    # if not args.map:
-        # tilemap = None
-    # args.c_file.write(tileset_to_c(tileset, tilemap, name=args.name))
-    # if args.header_file:
-        # args.header_file.write(tileset_to_h(tileset, tilemap, name=args.name))
+    elif args.subcommand == "tilemap":
+        tileset = Image.open(args.tileset)
+        tilemap = Image.open(args.tilemap)
+        generate_tilemap(
+                tileset,
+                tilemap,
+                output_c=args.output_c_file,
+                output_h=args.output_header_file,
+                name=args.name,
+                offset=args.offset,
+                missing=args.missing,
+                replace=args.replace
+                )
 
 
 if __name__ == "__main__":

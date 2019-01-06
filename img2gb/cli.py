@@ -92,6 +92,7 @@ def generate_tilemap_cli(parser):
             "-m",
             "--missing",
             choices=["error", "replace"],
+            default="error",
             help="action to do when a tile of the tilemap is missing from the tileset (default = error)"  # noqa
             )
     parser.add_argument(
@@ -99,6 +100,7 @@ def generate_tilemap_cli(parser):
             "--replace",
             type=int,
             metavar="TILE_ID",
+            default=0,
             help="replace missing tiles by the given one when --missing=replace"  # noqa
             )
     parser.add_argument(

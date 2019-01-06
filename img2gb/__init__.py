@@ -148,7 +148,25 @@ def generate_tilemap(
 
     TODO examples
     """
-    raise NotImplementedError()
+    if offset:
+        raise NotImplementedError()  # TODO
+
+    if missing == "append":
+        raise ValueError("missing=append is not available from high level functions")  # noqa
+
+    tileset = GBTileset.from_iamge(input_tileset, dedup=False)
+    tilemap = GBTilemap.from_image(
+            input_tilemap_image,
+            gbtileset=tileset,
+            missing=missing,
+            replace=replace,
+            )
+
+    if output_c:
+        raise NotImplementedError()  # TODO
+
+    if output_h:
+        raise NotImplementedError()  # TODO
 
 
 __all__ = [
