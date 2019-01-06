@@ -146,7 +146,32 @@ def generate_tilemap(
     :param int replace: The id of the replacement tile when
             ``missing="replace"``.
 
-    TODO examples
+    Example:
+
+    .. code-block:: C
+
+        from io import BytesIO
+        from PIL import Image
+        import img2gb
+
+        image = Image.open("./my_tilemap.png")
+
+        # Generate the tileset image from the tilemap image
+        tileset_io = BytesIO()
+        img2gb.generate_tileset(
+            [image],
+            output_image=tileset_io,
+            dedup=True)
+        tileset_io.seek(0)
+
+        # Generate the tilemap
+        tileset_image = Image.open(tileset_io)
+        img2gb.generate_tilemap(
+            tileset_image,
+            image,
+            output_c=open("tilemap.c", "w"),
+            output_h=open("tilemap.h", "w"))
+
     """
     if offset:
         raise NotImplementedError()  # TODO
@@ -154,7 +179,7 @@ def generate_tilemap(
     if missing == "append":
         raise ValueError("missing=append is not available from high level functions")  # noqa
 
-    tileset = GBTileset.from_iamge(input_tileset, dedup=False)
+    tileset = GBTileset.from_image(input_tileset, dedup=False)
     tilemap = GBTilemap.from_image(
             input_tilemap_image,
             gbtileset=tileset,
@@ -163,10 +188,17 @@ def generate_tilemap(
             )
 
     if output_c:
-        raise NotImplementedError()  # TODO
+        c_code = generate_c_file(tilemap.to_c_string(name=name))
+        output_c.write(c_code)
 
     if output_h:
-        raise NotImplementedError()  # TODO
+        filename = "%s.h" % name.lower()
+        if hasattr(output_h, "name"):
+            filename = os.path.basename(output_h.name)
+        h_code = generate_c_header_file(
+                tilemap.to_c_header_string(name=name),
+                filename=filename)
+        output_h.write(h_code)
 
 
 __all__ = [
