@@ -46,11 +46,32 @@ class GBTilemap(object):
     """
 
     @classmethod
-    def from_image(Cls, pil_image, gbtileset=None, dedup=True):
+    def from_image(
+            Cls,
+            pil_image,
+            gbtileset=None,
+            missing="append",
+            replace=0,
+            dedup=True
+            ):
         """Generates the tilemap from the given image. The tileset can also be
         generated at the same time.
 
-        TODO This API will change, so it will be decumented later...
+        :param PIL.Image.Image pil_image: The image that represents the
+                tilemap.
+        :param GBTileset gbtileset: The tileset that contains the tiles used in
+                the tilemap (a new empty one is created if not provided).
+        :param str missing: What to do if a tile is missing from the tileset:
+
+                * ``"append"`` (default): append the tile to the tileset,
+                * ``"error"``: raise an error,
+                * ``"replace"``: relpace by an other tile (see the ``replace``
+                  argument).
+
+        :param int replace: The id of the replacement tile when
+                ``missing="replace"``.
+        :param bool dedup: Deduplicate tiles when ``missing="append"`` (default
+                = ``True``).
         """
         image = to_pil_rgb_image(pil_image)
         width, height = image.size
@@ -66,7 +87,14 @@ class GBTilemap(object):
         for tile_y in range(0, height, 8):
             for tile_x in range(0, width, 8):
                 tile = GBTile.from_image(image, tile_x, tile_y)
-                tilemap.put_tile(tile_x / 8, tile_y / 8, tile, dedup=dedup)
+                tilemap.put_tile(
+                        tile_x / 8,
+                        tile_y / 8,
+                        tile,
+                        missing=missing,
+                        replace=replace,
+                        dedup=dedup
+                        )
 
         return tilemap
 
