@@ -5,6 +5,8 @@ Welcome to img2gb's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   ./tileset-cli.rst
+   ./tilemap-cli.rst
    ./api/index.rst
 
 
