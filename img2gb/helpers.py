@@ -7,14 +7,14 @@ def rgba_brightness(r, g, b, a=None):
     return max(r, g, b)
 
 
-def brightness_to_color_id(brightness):
+def brightness_to_color_id(brightness, invert=False):
     if brightness > 240:
-        return 0
+        return 0 if not invert else 3
     if brightness < 15:
-        return 3
+        return 3 if not invert else 0
     if brightness < 128:
-        return 2
-    return 1
+        return 2 if not invert else 1
+    return 1 if not invert else 2
 
 
 def to_pil_rgb_image(image):

@@ -37,7 +37,7 @@ def generate_tileset(
     :param bool dedup: Deduplicate the tiles of the tileset (default =
             ``False``)
     :param bool alternative_palette: Use the sprite's alternative palette
-            (default = ``False``)
+            (inverted colors, default = ``False``)
 
     Example using files::
 
@@ -83,15 +83,19 @@ def generate_tileset(
         c_code = c_code_io.read()
         print(c_code)
     """
-    if alternative_palette:
-        raise NotImplementedError()  # TODO
-
     if type(input_images) is not list:
-        tileset = GBTileset.from_image(input_images, dedup=dedup)
+        tileset = GBTileset.from_image(
+                input_images,
+                dedup=dedup,
+                alternative_palette=alternative_palette
+                )
     else:
         tileset = GBTileset()
         for image in input_images:
-            tileset.merge(GBTileset.from_image(image), dedup=dedup)
+            tileset.merge(GBTileset.from_image(
+                image,
+                alternative_palette=alternative_palette
+                ), dedup=dedup)
 
     if output_c:
         c_code = generate_c_file(tileset.to_c_string(name=name))

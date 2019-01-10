@@ -33,14 +33,16 @@ class GBTile(object):
     """Stores and manipulates data of a single GameBoy tile (8x8 pixels)."""
 
     @classmethod
-    def from_image(Cls, pil_image, tile_x=0, tile_y=0):
+    def from_image(Cls, pil_image, tile_x=0, tile_y=0, alternative_palette=False):  # noqa
         """Create a new GBTile from the given image.
 
         :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.
         :param int tile_x: The x location of the tile in the image (default =
-                           ``0``).
+                ``0``).
         :param int tile_y: The y location of the tile in the image (default =
-                           ``0``).
+                ``0``).
+        :param bool alternative_palette: Use the sprite's alternative palette
+                (inverted colors, default = ``False``).
 
         :rtype: GBTile
         """
@@ -51,7 +53,10 @@ class GBTile(object):
             for x in range(8):
                 pix_rgb = image.getpixel((tile_x + x, tile_y + y))
                 pix_brightness = rgba_brightness(*pix_rgb)
-                color_id = brightness_to_color_id(pix_brightness)
+                color_id = brightness_to_color_id(
+                        pix_brightness,
+                        invert=alternative_palette
+                        )
                 tile.put_pixel(x, y, color_id)
 
         return tile
