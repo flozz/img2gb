@@ -46,6 +46,13 @@ def generate_tileset_cli(parser):
             help="invert the colors to allow tiles to be used with the sprites alternative palette"  # noqa
             )
     parser.add_argument(
+            "-s",
+            "--sprite8x16",
+            action="store_true",
+            default=False,
+            help="Rearrange the tiles to be used in 8x16 sprites"
+            )
+    parser.add_argument(
             "-n",
             "--name",
             type=str,

@@ -13,7 +13,8 @@ def generate_tileset(
         output_image=None,
         name="TILESET",
         dedup=False,
-        alternative_palette=False):
+        alternative_palette=False,
+        sprite8x16=False):
     """Function that generates tileset's C file, C header and image from an
     input image.
 
@@ -38,6 +39,8 @@ def generate_tileset(
             ``False``)
     :param bool alternative_palette: Use the sprite's alternative palette
             (inverted colors, default = ``False``)
+    :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites
+            (default = ``False``).
 
     Example using files::
 
@@ -87,14 +90,16 @@ def generate_tileset(
         tileset = GBTileset.from_image(
                 input_images,
                 dedup=dedup,
-                alternative_palette=alternative_palette
+                alternative_palette=alternative_palette,
+                sprite8x16=sprite8x16
                 )
     else:
         tileset = GBTileset()
         for image in input_images:
             tileset.merge(GBTileset.from_image(
                 image,
-                alternative_palette=alternative_palette
+                alternative_palette=alternative_palette,
+                sprite8x16=sprite8x16
                 ), dedup=dedup)
 
     if output_c:
