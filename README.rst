@@ -79,6 +79,7 @@ img2gb tileset
       -a, --alternative-palette
                             invert the colors to allow tiles to be used with the
                             sprites alternative palette
+      -s, --sprite8x16      Rearrange the tiles to be used in 8x16 sprites
       -n NAME, --name NAME  name of the tileset (used for variable names in
                             generated code, default=TILESET)
 
