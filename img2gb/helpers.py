@@ -31,3 +31,10 @@ def to_pil_rgb_image(image):
     rgb_image.paste(image, mask=mask)
 
     return rgb_image
+
+
+def tileset_iterator(width, height, sprite8x16=False):
+    for y in range(0, height, 16 if sprite8x16 else 8):
+        for x in range(0, width, 8):
+            for d in (0, 8) if sprite8x16 else (0,):
+                yield x, y + d

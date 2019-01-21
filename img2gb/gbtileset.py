@@ -25,14 +25,20 @@ Creating a tileset from a PIL image::
 from PIL import Image
 
 from .gbtile import GBTile
-from .helpers import to_pil_rgb_image
+from .helpers import to_pil_rgb_image, tileset_iterator
 
 
 class GBTileset(object):
     """Stores and manipulate a GameBoy tileset (up to 255 tiles)."""
 
     @classmethod
-    def from_image(Cls, pil_image, dedup=False, alternative_palette=False):
+    def from_image(
+            Cls,
+            pil_image,
+            dedup=False,
+            alternative_palette=False,
+            sprite8x16=False,
+            ):
         """Create a new GBTileset from the given image.
 
         :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.
@@ -40,6 +46,8 @@ class GBTileset(object):
                 ``False``).
         :param bool alternative_palette: Use the sprite's alternative palette
                 (inverted colors, default = ``False``).
+        :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites
+                (default = ``False``).
         :rtype: GBTileset
 
         .. NOTE::
@@ -53,19 +61,21 @@ class GBTileset(object):
         if width % 8 or height % 8:
             raise ValueError("The input image width and height must be a multiple of 8")  # noqa
 
+        if height % 16 and sprite8x16:
+            raise ValueError("The input image height must be a multiple of 16 when sprite8x16=True")  # noqa
+
         # TODO check tile count <= 255
 
         tileset = Cls()
 
-        for tile_y in range(0, height, 8):
-            for tile_x in range(0, width, 8):
-                tile = GBTile.from_image(
-                        image,
-                        tile_x,
-                        tile_y,
-                        alternative_palette=alternative_palette
-                        )
-                tileset.add_tile(tile, dedup=dedup)
+        for tile_x, tile_y in tileset_iterator(width, height, sprite8x16):
+            tile = GBTile.from_image(
+                    image,
+                    tile_x,
+                    tile_y,
+                    alternative_palette=alternative_palette
+                    )
+            tileset.add_tile(tile, dedup=dedup)
 
         return tileset
 

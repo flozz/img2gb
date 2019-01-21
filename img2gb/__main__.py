@@ -18,7 +18,8 @@ def main(argv=sys.argv):
                 output_image=args.output_image,
                 name=args.name,
                 dedup=args.deduplicate,
-                alternative_palette=args.alternative_palette
+                alternative_palette=args.alternative_palette,
+                sprite8x16=args.sprite8x16
                 )
     elif args.subcommand == "tilemap":
         tileset = Image.open(args.tileset)
