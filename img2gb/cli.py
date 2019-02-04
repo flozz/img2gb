@@ -1,5 +1,7 @@
 import argparse
 
+from .version import VERSION
+
 
 def generate_tileset_cli(parser):
     # Positional
@@ -124,6 +126,14 @@ def generate_cli():
             prog="img2gb",
             description="Converts images to GameBoy tilesets and tilemaps"
             )
+
+    parser.add_argument(
+            "-V",
+            "--version",
+            action="version",
+            version=VERSION
+            )
+
     subparsers = parser.add_subparsers(dest="subcommand")
 
     tileset_parser = subparsers.add_parser(

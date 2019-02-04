@@ -4,6 +4,7 @@ from .gbtile import GBTile
 from .gbtileset import GBTileset
 from .gbtilemap import GBTilemap
 from .c_export import generate_c_file, generate_c_header_file
+from .version import VERSION
 
 
 def generate_tileset(
@@ -214,4 +215,7 @@ __all__ = [
         "GBTile",
         "GBTileset",
         "GBTilemap",
+        "generate_tileset",
+        "generate_tilemap",
+        "VERSION",
         ]
