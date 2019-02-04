@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GBTileset &mdash; img2gb  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GBTilemap" href="gbtilemap.html" />
+    <link rel="prev" title="GBTile" href="gbtile.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> img2gb
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing img2gb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto.html">Howto Generate a Tileset and a Tilemap (CLI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="high-level-functions.html">High-Level Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbtile.html">GBTile</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GBTileset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gbtilemap.html">GBTilemap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c_export.html">C Export Functions</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">img2gb</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Python API</a> &raquo;</li>
+        
+      <li>GBTileset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/gbtileset.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-img2gb.gbtileset">
+<span id="gbtileset"></span><h1>GBTileset<a class="headerlink" href="#module-img2gb.gbtileset" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#img2gb.gbtileset.GBTileset" title="img2gb.gbtileset.GBTileset"><code class="xref py py-class docutils literal notranslate"><span class="pre">GBTileset</span></code></a> class represents a GameBoy tileset. It is composed of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">GBTile</span></code> (up to 255 tiles).</p>
+<p>Creating a tileset from scratch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">img2gb</span> <span class="k">import</span> <span class="n">GBTile</span><span class="p">,</span> <span class="n">GBTileset</span>
+
+<span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="p">()</span>
+<span class="n">tile</span> <span class="o">=</span> <span class="n">GBTile</span><span class="p">()</span>
+
+<span class="n">tileset</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">)</span>  <span class="c1"># -&gt; 0</span>
+<span class="n">tileset</span><span class="o">.</span><span class="n">length</span>  <span class="c1"># -&gt; 1</span>
+</pre></div>
+</div>
+<p>Creating a tileset from a PIL image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">img2gb</span> <span class="k">import</span> <span class="n">GBTileset</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;./my_tileset.png&quot;</span><span class="p">)</span>
+<span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="img2gb.gbtileset.GBTileset">
+<em class="property">class </em><code class="descclassname">img2gb.gbtileset.</code><code class="descname">GBTileset</code><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores and manipulate a GameBoy tileset (up to 255 tiles).</p>
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.add_tile">
+<code class="descname">add_tile</code><span class="sig-paren">(</span><em>gbtile</em>, <em>dedup=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.add_tile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.add_tile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a tile to the tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gbtile</strong> (<a class="reference internal" href="gbtile.html#img2gb.gbtile.GBTile" title="img2gb.gbtile.GBTile"><em>GBTile</em></a>) – The tile to add.</li>
+<li><strong>dedup</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the tile will be added only if there is
+no identical tile in the tileset (default =
+<code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">int</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The id of the tile in the tileset.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="img2gb.gbtileset.GBTileset.data">
+<code class="descname">data</code><a class="headerlink" href="#img2gb.gbtileset.GBTileset.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw data of the tiles in the tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list of int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="img2gb.gbtileset.GBTileset.from_image">
+<em class="property">classmethod </em><code class="descname">from_image</code><span class="sig-paren">(</span><em>pil_image</em>, <em>dedup=False</em>, <em>alternative_palette=False</em>, <em>sprite8x16=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.from_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.from_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new GBTileset from the given image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pil_image</strong> (<em>PIL.Image.Image</em>) – The input PIL (or Pillow) image.</li>
+<li><strong>dedup</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, deduplicate the tiles (default =
+<code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+<li><strong>alternative_palette</strong> (<em>bool</em>) – Use the sprite’s alternative palette
+(inverted colors, default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+<li><strong>sprite8x16</strong> (<em>bool</em>) – Rearrange the tiles to be used in 8x16 sprites
+(default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#img2gb.gbtileset.GBTileset" title="img2gb.gbtileset.GBTileset">GBTileset</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>The image width and height must be a multiple of 8.</li>
+<li>The image can contain up to 255 different tiles.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="img2gb.gbtileset.GBTileset.length">
+<code class="descname">length</code><a class="headerlink" href="#img2gb.gbtileset.GBTileset.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of tiles in the tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.merge">
+<code class="descname">merge</code><span class="sig-paren">(</span><em>gbtileset</em>, <em>dedup=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge the tiles of the given tileset in the current tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gbtileset</strong> (<a class="reference internal" href="#img2gb.gbtileset.GBTileset" title="img2gb.gbtileset.GBTileset"><em>GBTileset</em></a>) – The tileset to merge into the current one.</li>
+<li><strong>dedup</strong> (<em>bool</em>) – Add only the tiles that are note already present in
+the current tileset (default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="img2gb.gbtileset.GBTileset.tiles">
+<code class="descname">tiles</code><a class="headerlink" href="#img2gb.gbtileset.GBTileset.tiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tiles of the tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="gbtile.html#img2gb.gbtile.GBTile" title="img2gb.gbtile.GBTile">GBTile</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.to_c_header_string">
+<code class="descname">to_c_header_string</code><span class="sig-paren">(</span><em>name='TILESET'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.to_c_header_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.to_c_header_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the C header (.h) code for the tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – The name of the variable in the generated code (always
+converted to uppercase in the generated code, default =
+<code class="docutils literal notranslate"><span class="pre">&quot;TILESET&quot;</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="k">const</span> <span class="n">UINT8</span> <span class="n">TILESET</span><span class="p">[];</span>
+<span class="n">define</span> <span class="n">TILESET_TILE_COUNT</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.to_c_string">
+<code class="descname">to_c_string</code><span class="sig-paren">(</span><em>name='TILESET'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.to_c_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.to_c_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns C code that represents the data of the tileset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – The name of the variable in the generated code (always
+converted to uppercase in the generated code, default =
+<code class="docutils literal notranslate"><span class="pre">&quot;TILESET&quot;</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="n">UINT8</span> <span class="n">TILESET</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span>
+    <span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0xA5</span><span class="p">,</span> <span class="mh">0x7B</span><span class="p">,</span> <span class="mh">0xA5</span><span class="p">,</span> <span class="mh">0x7B</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0x63</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span>
+    <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span>
+    <span class="mh">0x3C</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x54</span><span class="p">,</span> <span class="mh">0x2A</span><span class="p">,</span> <span class="mh">0xA3</span><span class="p">,</span> <span class="mh">0x5F</span><span class="p">,</span> <span class="mh">0xC1</span><span class="p">,</span> <span class="mh">0x3F</span><span class="p">,</span> <span class="mh">0x83</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0xC5</span><span class="p">,</span> <span class="mh">0x3F</span><span class="p">,</span> <span class="mh">0x2A</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0x3C</span><span class="p">,</span> <span class="mh">0x3C</span><span class="p">,</span>
+    <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x0A</span><span class="p">,</span> <span class="mh">0x0A</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x99</span><span class="p">,</span> <span class="mh">0x77</span><span class="p">,</span> <span class="mh">0x99</span><span class="p">,</span> <span class="mh">0x77</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.to_hex_string">
+<code class="descname">to_hex_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.to_hex_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.to_hex_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the tileset as an hexadecimal-encoded string (one tile per
+line).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p>e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>
+<span class="n">FF</span> <span class="mi">01</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="n">BD</span> <span class="mi">7</span><span class="n">F</span> <span class="n">A5</span> <span class="mi">7</span><span class="n">B</span> <span class="n">A5</span> <span class="mi">7</span><span class="n">B</span> <span class="n">BD</span> <span class="mi">63</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="n">FF</span> <span class="n">FF</span>
+<span class="mi">7</span><span class="n">E</span> <span class="mi">00</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="mi">81</span> <span class="mi">7</span><span class="n">F</span> <span class="mi">7</span><span class="n">E</span> <span class="mi">7</span><span class="n">E</span>
+<span class="mi">3</span><span class="n">C</span> <span class="mi">00</span> <span class="mi">54</span> <span class="mi">2</span><span class="n">A</span> <span class="n">A3</span> <span class="mi">5</span><span class="n">F</span> <span class="n">C1</span> <span class="mi">3</span><span class="n">F</span> <span class="mi">83</span> <span class="mi">7</span><span class="n">F</span> <span class="n">C5</span> <span class="mi">3</span><span class="n">F</span> <span class="mi">2</span><span class="n">A</span> <span class="mi">7</span><span class="n">E</span> <span class="mi">3</span><span class="n">C</span> <span class="mi">3</span><span class="n">C</span>
+<span class="mi">04</span> <span class="mi">04</span> <span class="mi">04</span> <span class="mi">04</span> <span class="mi">0</span><span class="n">A</span> <span class="mi">0</span><span class="n">A</span> <span class="mi">12</span> <span class="mi">12</span> <span class="mi">66</span> <span class="mi">00</span> <span class="mi">99</span> <span class="mi">77</span> <span class="mi">99</span> <span class="mi">77</span> <span class="mi">66</span> <span class="mi">66</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.to_image">
+<code class="descname">to_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.to_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.to_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a PIL image from the tileset. The generated image is an
+indexed image with a 4 shades of gray palette.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PIL.Image.Image</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gbtilemap.html" class="btn btn-neutral float-right" title="GBTilemap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gbtile.html" class="btn btn-neutral" title="GBTile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Fabien LOISON
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

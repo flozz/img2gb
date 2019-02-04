@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>img2gb.gbtileset &mdash; img2gb  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> img2gb
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing img2gb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto.html">Howto Generate a Tileset and a Tilemap (CLI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Python API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">img2gb</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../img2gb.html">img2gb</a> &raquo;</li>
+        
+      <li>img2gb.gbtileset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for img2gb.gbtileset</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :class:`GBTileset` class represents a GameBoy tileset. It is composed of</span>
+<span class="sd">:class:`GBTile` (up to 255 tiles).</span>
+
+<span class="sd">Creating a tileset from scratch::</span>
+
+<span class="sd">    from img2gb import GBTile, GBTileset</span>
+
+<span class="sd">    tileset = GBTileset()</span>
+<span class="sd">    tile = GBTile()</span>
+
+<span class="sd">    tileset.add_tile(tile)  # -&gt; 0</span>
+<span class="sd">    tileset.length  # -&gt; 1</span>
+
+<span class="sd">Creating a tileset from a PIL image::</span>
+
+<span class="sd">    from img2gb import GBTileset</span>
+<span class="sd">    from PIL import Image</span>
+
+<span class="sd">    image = Image.open(&quot;./my_tileset.png&quot;)</span>
+<span class="sd">    tileset = GBTileset.from_image(image)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="kn">from</span> <span class="nn">.gbtile</span> <span class="k">import</span> <span class="n">GBTile</span>
+<span class="kn">from</span> <span class="nn">.helpers</span> <span class="k">import</span> <span class="n">to_pil_rgb_image</span><span class="p">,</span> <span class="n">tileset_iterator</span>
+
+
+<div class="viewcode-block" id="GBTileset"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset">[docs]</a><span class="k">class</span> <span class="nc">GBTileset</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Stores and manipulate a GameBoy tileset (up to 255 tiles).&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GBTileset.from_image"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.from_image">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_image</span><span class="p">(</span>
+            <span class="n">Cls</span><span class="p">,</span>
+            <span class="n">pil_image</span><span class="p">,</span>
+            <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">alternative_palette</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">sprite8x16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new GBTileset from the given image.</span>
+
+<span class="sd">        :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.</span>
+<span class="sd">        :param bool dedup: If ``True``, deduplicate the tiles (default =</span>
+<span class="sd">                ``False``).</span>
+<span class="sd">        :param bool alternative_palette: Use the sprite&#39;s alternative palette</span>
+<span class="sd">                (inverted colors, default = ``False``).</span>
+<span class="sd">        :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites</span>
+<span class="sd">                (default = ``False``).</span>
+<span class="sd">        :rtype: GBTileset</span>
+
+<span class="sd">        .. NOTE::</span>
+
+<span class="sd">           * The image width and height must be a multiple of 8.</span>
+<span class="sd">           * The image can contain up to 255 different tiles.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">to_pil_rgb_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="k">if</span> <span class="n">width</span> <span class="o">%</span> <span class="mi">8</span> <span class="ow">or</span> <span class="n">height</span> <span class="o">%</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input image width and height must be a multiple of 8&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
+
+        <span class="k">if</span> <span class="n">height</span> <span class="o">%</span> <span class="mi">16</span> <span class="ow">and</span> <span class="n">sprite8x16</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input image height must be a multiple of 16 when sprite8x16=True&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
+
+        <span class="c1"># TODO check tile count &lt;= 255</span>
+
+        <span class="n">tileset</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">tile_x</span><span class="p">,</span> <span class="n">tile_y</span> <span class="ow">in</span> <span class="n">tileset_iterator</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">sprite8x16</span><span class="p">):</span>
+            <span class="n">tile</span> <span class="o">=</span> <span class="n">GBTile</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
+                    <span class="n">image</span><span class="p">,</span>
+                    <span class="n">tile_x</span><span class="p">,</span>
+                    <span class="n">tile_y</span><span class="p">,</span>
+                    <span class="n">alternative_palette</span><span class="o">=</span><span class="n">alternative_palette</span>
+                    <span class="p">)</span>
+            <span class="n">tileset</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="n">dedup</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tileset</span></div>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of tiles in the tileset.</span>
+
+<span class="sd">        :type: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raw data of the tiles in the tileset.</span>
+
+<span class="sd">        :type: list of int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">+=</span> <span class="n">tile</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tiles of the tileset.</span>
+
+<span class="sd">        :type: GBTile</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span>
+
+<div class="viewcode-block" id="GBTileset.add_tile"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.add_tile">[docs]</a>    <span class="k">def</span> <span class="nf">add_tile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gbtile</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a tile to the tileset.</span>
+
+<span class="sd">        :param GBTile gbtile: The tile to add.</span>
+<span class="sd">        :param bool dedup: If ``True``, the tile will be added only if there is</span>
+<span class="sd">                           no identical tile in the tileset (default =</span>
+<span class="sd">                           ``False``).</span>
+
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :returns: The id of the tile in the tileset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dedup</span> <span class="ow">and</span> <span class="n">gbtile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span>
+        <span class="c1"># TODO check tile count &lt;= 255</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="GBTileset.merge"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gbtileset</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Merge the tiles of the given tileset in the current tileset.</span>
+
+<span class="sd">        :param GBTileset gbtileset: The tileset to merge into the current one.</span>
+<span class="sd">        :param bool dedup: Add only the tiles that are note already present in</span>
+<span class="sd">                the current tileset (default = ``False``).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">gbtileset</span><span class="o">.</span><span class="n">tiles</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="n">dedup</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GBTileset.to_hex_string"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.to_hex_string">[docs]</a>    <span class="k">def</span> <span class="nf">to_hex_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the tileset as an hexadecimal-encoded string (one tile per</span>
+<span class="sd">        line).</span>
+
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        e.g.::</span>
+
+<span class="sd">            00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span>
+<span class="sd">            FF 01 81 7F BD 7F A5 7B A5 7B BD 63 81 7F FF FF</span>
+<span class="sd">            7E 00 81 7F 81 7F 81 7F 81 7F 81 7F 81 7F 7E 7E</span>
+<span class="sd">            3C 00 54 2A A3 5F C1 3F 83 7F C5 3F 2A 7E 3C 3C</span>
+<span class="sd">            04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">tile</span><span class="o">.</span><span class="n">to_hex_string</span><span class="p">()</span> <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="GBTileset.to_c_string"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.to_c_string">[docs]</a>    <span class="k">def</span> <span class="nf">to_c_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TILESET&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns C code that represents the data of the tileset.</span>
+
+<span class="sd">        :param str name: The name of the variable in the generated code (always</span>
+<span class="sd">                converted to uppercase in the generated code, default =</span>
+<span class="sd">                ``&quot;TILESET&quot;``)</span>
+
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        .. code-block:: C</span>
+
+<span class="sd">            const UINT8 TILESET[] = {</span>
+<span class="sd">                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,</span>
+<span class="sd">                0xFF, 0x01, 0x81, 0x7F, 0xBD, 0x7F, 0xA5, 0x7B, 0xA5, 0x7B, 0xBD, 0x63, 0x81, 0x7F, 0xFF, 0xFF,</span>
+<span class="sd">                0x7E, 0x00, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x81, 0x7F, 0x7E, 0x7E,</span>
+<span class="sd">                0x3C, 0x00, 0x54, 0x2A, 0xA3, 0x5F, 0xC1, 0x3F, 0x83, 0x7F, 0xC5, 0x3F, 0x2A, 0x7E, 0x3C, 0x3C,</span>
+<span class="sd">                0x04, 0x04, 0x04, 0x04, 0x0A, 0x0A, 0x12, 0x12, 0x66, 0x00, 0x99, 0x77, 0x99, 0x77, 0x66, 0x66,</span>
+<span class="sd">            };</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;const UINT8 </span><span class="si">%s</span><span class="s2">[] = {</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s2">&quot;    </span><span class="si">%s</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;0x</span><span class="si">%02X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">tile</span><span class="o">.</span><span class="n">data</span><span class="p">])</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="s2">&quot;};&quot;</span>
+        <span class="k">return</span> <span class="n">c</span></div>
+
+<div class="viewcode-block" id="GBTileset.to_c_header_string"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.to_c_header_string">[docs]</a>    <span class="k">def</span> <span class="nf">to_c_header_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TILESET&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the C header (.h) code for the tileset.</span>
+
+<span class="sd">        :param str name: The name of the variable in the generated code (always</span>
+<span class="sd">                converted to uppercase in the generated code, default =</span>
+<span class="sd">                ``&quot;TILESET&quot;``)</span>
+<span class="sd">        :rtype: str</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        .. code-block:: C</span>
+
+<span class="sd">            extern const UINT8 TILESET[];</span>
+<span class="sd">            define TILESET_TILE_COUNT 5</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;extern const UINT8 </span><span class="si">%s</span><span class="s2">[];</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;#define </span><span class="si">%s</span><span class="s2">_TILE_COUNT </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="GBTileset.to_image"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.to_image">[docs]</a>    <span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates a PIL image from the tileset. The generated image is an</span>
+<span class="sd">        indexed image with a 4 shades of gray palette.</span>
+
+<span class="sd">        :rtype: PIL.Image.Image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">*</span> <span class="mi">8</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">8</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">8</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">//</span> <span class="mi">16</span> <span class="o">+</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">%</span> <span class="mi">16</span><span class="p">))</span> <span class="o">*</span> <span class="mi">8</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">putpalette</span><span class="p">([</span>
+                <span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span>
+                <span class="mh">0xBB</span><span class="p">,</span> <span class="mh">0xBB</span><span class="p">,</span> <span class="mh">0xBB</span><span class="p">,</span>
+                <span class="mh">0x55</span><span class="p">,</span> <span class="mh">0x55</span><span class="p">,</span> <span class="mh">0x55</span><span class="p">,</span>
+                <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span>
+                <span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">):</span>
+            <span class="n">tile_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span> <span class="o">%</span> <span class="n">width</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span> <span class="o">//</span> <span class="n">width</span> <span class="o">*</span> <span class="mi">8</span>
+            <span class="n">image</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">tile_image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">image</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Fabien LOISON
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

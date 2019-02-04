@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>img2gb &mdash; img2gb  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> img2gb
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing img2gb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto.html">Howto Generate a Tileset and a Tilemap (CLI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Python API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">img2gb</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>img2gb</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for img2gb</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="kn">from</span> <span class="nn">.gbtile</span> <span class="k">import</span> <span class="n">GBTile</span>
+<span class="kn">from</span> <span class="nn">.gbtileset</span> <span class="k">import</span> <span class="n">GBTileset</span>
+<span class="kn">from</span> <span class="nn">.gbtilemap</span> <span class="k">import</span> <span class="n">GBTilemap</span>
+<span class="kn">from</span> <span class="nn">.c_export</span> <span class="k">import</span> <span class="n">generate_c_file</span><span class="p">,</span> <span class="n">generate_c_header_file</span>
+<span class="kn">from</span> <span class="nn">.version</span> <span class="k">import</span> <span class="n">VERSION</span>
+
+
+<div class="viewcode-block" id="generate_tileset"><a class="viewcode-back" href="../api/high-level-functions.html#img2gb.generate_tileset">[docs]</a><span class="k">def</span> <span class="nf">generate_tileset</span><span class="p">(</span>
+        <span class="n">input_images</span><span class="p">,</span>
+        <span class="n">output_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TILESET&quot;</span><span class="p">,</span>
+        <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">alternative_palette</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">sprite8x16</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function that generates tileset&#39;s C file, C header and image from an</span>
+<span class="sd">    input image.</span>
+
+<span class="sd">    :param PIL.Image.Image|list input_images: The input image to generate the</span>
+<span class="sd">            tileset from.</span>
+<span class="sd">    :param file output_c: A file-like object where the C code will be generated</span>
+<span class="sd">            (``None`` to not generate C code).</span>
+<span class="sd">    :param file output_h: A file-like object where the C header (.h) code will</span>
+<span class="sd">            be generated (``None`` to not generate C header code).</span>
+<span class="sd">    :param file output_image: A file-like object where the image representing</span>
+<span class="sd">            the tileset will be generated (``None`` to not generate the image).</span>
+
+<span class="sd">            .. NOTE::</span>
+
+<span class="sd">               The file must be openend in binary mode (``open(&quot;file&quot;, &quot;wb&quot;)``)</span>
+<span class="sd">               or you must be using a binary-compatible file-like object, like</span>
+<span class="sd">               a :class:`io.BytesIO`.</span>
+
+<span class="sd">    :param str name: The name of the tileset (will be used in the generated</span>
+<span class="sd">            code, default = ``&quot;TILESET&quot;``)</span>
+<span class="sd">    :param bool dedup: Deduplicate the tiles of the tileset (default =</span>
+<span class="sd">            ``False``)</span>
+<span class="sd">    :param bool alternative_palette: Use the sprite&#39;s alternative palette</span>
+<span class="sd">            (inverted colors, default = ``False``)</span>
+<span class="sd">    :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites</span>
+<span class="sd">            (default = ``False``).</span>
+
+<span class="sd">    Example using files::</span>
+
+<span class="sd">        from PIL import Image</span>
+<span class="sd">        import img2gb</span>
+
+<span class="sd">        image = Image.open(&quot;./my_tileset.png&quot;)</span>
+<span class="sd">        c_file = open(&quot;example.c&quot;, &quot;w&quot;)</span>
+<span class="sd">        h_file = open(&quot;example.h&quot;, &quot;w&quot;)</span>
+<span class="sd">        image_file = open(&quot;example.png&quot;, &quot;wb&quot;)</span>
+
+<span class="sd">        img2gb.generate_tileset(</span>
+<span class="sd">            [image],</span>
+<span class="sd">            output_c=c_file,</span>
+<span class="sd">            output_h=h_file,</span>
+<span class="sd">            output_image=image_file,</span>
+<span class="sd">            dedup=True)</span>
+
+<span class="sd">        c_file.close()</span>
+<span class="sd">        h_file.close()</span>
+<span class="sd">        image_file.close()</span>
+
+<span class="sd">    Example using file-like objects::</span>
+
+<span class="sd">        from io import StringIO, BytesIO</span>
+<span class="sd">        from PIL import Image</span>
+<span class="sd">        import img2gb</span>
+
+<span class="sd">        image = Image.open(&quot;./my_tileset.png&quot;)</span>
+<span class="sd">        c_code_io = StringIO()</span>
+<span class="sd">        h_code_io = StringIO()</span>
+<span class="sd">        output_image = BytesIO()</span>
+
+<span class="sd">        img2gb.generate_tileset(</span>
+<span class="sd">            [image],</span>
+<span class="sd">            output_c=c_code_io,</span>
+<span class="sd">            output_h=h_code_io,</span>
+<span class="sd">            output_image=output_image,</span>
+<span class="sd">            dedup=True)</span>
+
+<span class="sd">        # Print the C code for the example:</span>
+<span class="sd">        c_code_io.seek(0)</span>
+<span class="sd">        c_code = c_code_io.read()</span>
+<span class="sd">        print(c_code)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">input_images</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
+                <span class="n">input_images</span><span class="p">,</span>
+                <span class="n">dedup</span><span class="o">=</span><span class="n">dedup</span><span class="p">,</span>
+                <span class="n">alternative_palette</span><span class="o">=</span><span class="n">alternative_palette</span><span class="p">,</span>
+                <span class="n">sprite8x16</span><span class="o">=</span><span class="n">sprite8x16</span>
+                <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">input_images</span><span class="p">:</span>
+            <span class="n">tileset</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
+                <span class="n">image</span><span class="p">,</span>
+                <span class="n">alternative_palette</span><span class="o">=</span><span class="n">alternative_palette</span><span class="p">,</span>
+                <span class="n">sprite8x16</span><span class="o">=</span><span class="n">sprite8x16</span>
+                <span class="p">),</span> <span class="n">dedup</span><span class="o">=</span><span class="n">dedup</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_c</span><span class="p">:</span>
+        <span class="n">c_code</span> <span class="o">=</span> <span class="n">generate_c_file</span><span class="p">(</span><span class="n">tileset</span><span class="o">.</span><span class="n">to_c_string</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+        <span class="n">output_c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_h</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.h&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">output_h</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_h</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">h_code</span> <span class="o">=</span> <span class="n">generate_c_header_file</span><span class="p">(</span>
+                <span class="n">tileset</span><span class="o">.</span><span class="n">to_c_header_string</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">),</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">output_h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">h_code</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_image</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">tileset</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span>
+        <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_image</span><span class="p">,</span> <span class="s2">&quot;PNG&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_tilemap"><a class="viewcode-back" href="../api/high-level-functions.html#img2gb.generate_tilemap">[docs]</a><span class="k">def</span> <span class="nf">generate_tilemap</span><span class="p">(</span>
+        <span class="n">input_tileset</span><span class="p">,</span>
+        <span class="n">input_tilemap_image</span><span class="p">,</span>
+        <span class="n">output_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TILEMAP&quot;</span><span class="p">,</span>
+        <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">missing</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+        <span class="n">replace</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function that generates tilemap&#39;s C file and C header from an input</span>
+<span class="sd">    tileset and image.</span>
+
+<span class="sd">    :param PIL.Image.Image input_tileset: The tileset that contains the tiles</span>
+<span class="sd">            used in the tilemap.</span>
+<span class="sd">    :param PIL.Image.Image input_tilemap_image: An image that represents the</span>
+<span class="sd">            tilemap (its size must be a multiple of 8 and 256x256px maximum).</span>
+<span class="sd">    :param file output_c: A file-like object where the C code will be generated</span>
+<span class="sd">            (``None`` to not generate C code).</span>
+<span class="sd">    :param file output_h: A file-like object where the C header (.h) code will</span>
+<span class="sd">            be generated (``None`` to not generate C header code).</span>
+<span class="sd">    :param str name: The name of the tilemap (will be used in the generated</span>
+<span class="sd">            code, default = ``&quot;TILEMAP&quot;``).</span>
+<span class="sd">    :param int offset: Offset where the tileset starts (useful only of you will</span>
+<span class="sd">            load the given tileset at a place different from ``0`` in the</span>
+<span class="sd">            GameBoy video memeory).</span>
+<span class="sd">    :param string missing: Action to do if a tile of the tilemap is missing</span>
+<span class="sd">            from the tileset:</span>
+
+<span class="sd">            * ``&quot;error&quot;`` (default): raise an error,</span>
+<span class="sd">            * ``&quot;replace&quot;``: replace the missing tile by an other one (see</span>
+<span class="sd">              ``replace`` option).</span>
+
+<span class="sd">    :param int replace: The id of the replacement tile when</span>
+<span class="sd">            ``missing=&quot;replace&quot;``.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    .. code-block:: C</span>
+
+<span class="sd">        from io import BytesIO</span>
+<span class="sd">        from PIL import Image</span>
+<span class="sd">        import img2gb</span>
+
+<span class="sd">        image = Image.open(&quot;./my_tilemap.png&quot;)</span>
+
+<span class="sd">        # Generate the tileset image from the tilemap image</span>
+<span class="sd">        tileset_io = BytesIO()</span>
+<span class="sd">        img2gb.generate_tileset(</span>
+<span class="sd">            [image],</span>
+<span class="sd">            output_image=tileset_io,</span>
+<span class="sd">            dedup=True)</span>
+<span class="sd">        tileset_io.seek(0)</span>
+
+<span class="sd">        # Generate the tilemap</span>
+<span class="sd">        tileset_image = Image.open(tileset_io)</span>
+<span class="sd">        img2gb.generate_tilemap(</span>
+<span class="sd">            tileset_image,</span>
+<span class="sd">            image,</span>
+<span class="sd">            output_c=open(&quot;tilemap.c&quot;, &quot;w&quot;),</span>
+<span class="sd">            output_h=open(&quot;tilemap.h&quot;, &quot;w&quot;))</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">offset</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>  <span class="c1"># TODO</span>
+
+    <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s2">&quot;append&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;missing=append is not available from high level functions&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
+
+    <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">input_tileset</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">tilemap</span> <span class="o">=</span> <span class="n">GBTilemap</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
+            <span class="n">input_tilemap_image</span><span class="p">,</span>
+            <span class="n">gbtileset</span><span class="o">=</span><span class="n">tileset</span><span class="p">,</span>
+            <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span>
+            <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_c</span><span class="p">:</span>
+        <span class="n">c_code</span> <span class="o">=</span> <span class="n">generate_c_file</span><span class="p">(</span><span class="n">tilemap</span><span class="o">.</span><span class="n">to_c_string</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+        <span class="n">output_c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output_h</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.h&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">output_h</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_h</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">h_code</span> <span class="o">=</span> <span class="n">generate_c_header_file</span><span class="p">(</span>
+                <span class="n">tilemap</span><span class="o">.</span><span class="n">to_c_header_string</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">),</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">output_h</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">h_code</span><span class="p">)</span></div>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;GBTile&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GBTileset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GBTilemap&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;generate_tileset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;generate_tilemap&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;VERSION&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Fabien LOISON
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
