@@ -1,9 +1,14 @@
-img2gb - Converts Images to GameBoy Tileset
-===========================================
+img2gb - Converts Images to GameBoy Tileset and Tilemap
+=======================================================
 
 |Build Status| |PYPI Version| |License|
 
-.. image:: ./banner.png
+    img2gb generates GameBoy Tilesets and Tilemaps from standard image (PNG,
+    JPEG,...). It converts the images into the GameBoy image format and
+    generates C code (``.c`` and ``.h`` files) that can be used in GameBoy
+    projects.
+
+.. image:: ./doc/_static/banner.png
 
 
 Dependencies
@@ -184,6 +189,9 @@ Example Generated Code
 Links
 -----
 
+* Examples of GameBoy programs that uses img2gb for graphics:
+  * https://github.com/flozz/gameboy-examples/tree/master/05-graphics2
+  * https://github.com/flozz/gameboy-examples/tree/master/06-graphics3-background
 * Article about the tile encoding and img2gb: https://blog.flozz.fr/2018/11/19/developpement-gameboy-5-creer-des-tilesets/ (French)
 
 
