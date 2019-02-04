@@ -11,6 +11,7 @@ C code (``.c`` and ``.h`` files) that can be used in GameBoy projects.
    :maxdepth: 2
    :caption: Contents:
 
+   ./install.rst
    ./howto.rst
    ./cli.rst
    ./api/index.rst
