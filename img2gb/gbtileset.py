@@ -29,7 +29,10 @@ from .helpers import to_pil_rgb_image, tileset_iterator
 
 
 class GBTileset(object):
-    """Stores and manipulate a GameBoy tileset (up to 255 tiles)."""
+    """Stores and manipulate a GameBoy tileset (up to 255 tiles).
+
+    :param int offset: An offset to apply to tile ids.
+    """
 
     @classmethod
     def from_image(
@@ -38,6 +41,7 @@ class GBTileset(object):
             dedup=False,
             alternative_palette=False,
             sprite8x16=False,
+            offset=0
             ):
         """Create a new GBTileset from the given image.
 
@@ -48,6 +52,7 @@ class GBTileset(object):
                 (inverted colors, default = ``False``).
         :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites
                 (default = ``False``).
+        :param int offset: An offset to apply to tile ids.
         :rtype: GBTileset
 
         .. NOTE::
@@ -66,7 +71,7 @@ class GBTileset(object):
 
         # TODO check tile count <= 255
 
-        tileset = Cls()
+        tileset = Cls(offset=offset)
 
         for tile_x, tile_y in tileset_iterator(width, height, sprite8x16):
             tile = GBTile.from_image(
@@ -79,8 +84,21 @@ class GBTileset(object):
 
         return tileset
 
-    def __init__(self):
+    def __init__(self, offset=0):
+        self._offset = offset
         self._tiles = []
+
+    @property
+    def offset(self):
+        """An offset applied to each tiles.
+
+        :type: int
+        """
+        return self._offset
+
+    @offset.setter
+    def offset(self, offset):
+        self._offset = offset
 
     @property
     def length(self):
@@ -118,16 +136,16 @@ class GBTileset(object):
                            ``False``).
 
         :rtype: int
-        :returns: The id of the tile in the tileset.
+        :returns: The id of the tile in the tileset (including offset).
         """
         if dedup and gbtile in self._tiles:
-            return self._tiles.index(gbtile)
+            return self._tiles.index(gbtile) + self._offset
         # TODO check tile count <= 255
         self._tiles.append(gbtile)
-        return len(self._tiles) - 1
+        return len(self._tiles) - 1 + self._offset
 
     def merge(self, gbtileset, dedup=False):
-        """Merge the tiles of the given tileset in the current tileset.
+        """Merges the tiles of the given tileset in the current tileset.
 
         :param GBTileset gbtileset: The tileset to merge into the current one.
         :param bool dedup: Add only the tiles that are note already present in
@@ -135,6 +153,15 @@ class GBTileset(object):
         """
         for tile in gbtileset.tiles:
             self.add_tile(tile, dedup=dedup)
+
+    def index(self, gbtile):
+        """Get the id of the given tile in the tileset (including offset).
+
+        :param GBTile gbtile: The tile.
+        :rtype: int
+        :returns: The id of the tile in the tileset (including offset).
+        """
+        return self._tiles.index(gbtile) + self._offset
 
     def to_hex_string(self):
         """Returns the tileset as an hexadecimal-encoded string (one tile per

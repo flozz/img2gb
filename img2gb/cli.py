@@ -95,6 +95,7 @@ def generate_tilemap_cli(parser):
             "-o",
             "--offset",
             type=int,
+            default=0,
             help="offset of the tileset in the video memory (default = 0)"
             )
     parser.add_argument(

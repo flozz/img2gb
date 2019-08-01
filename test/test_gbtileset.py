@@ -47,6 +47,11 @@ class Test_GBTileset(object):
         assert tileset.add_tile(tile1) == 0
         assert tileset.add_tile(tile1) == 1
 
+    def test_add_tile_with_offset(self, tile1):
+        tileset = GBTileset(offset=10)
+        assert tileset.add_tile(tile1) == 10
+        assert tileset.add_tile(tile1) == 11
+
     def test_add_tile_with_deduplication(self, tile1, tile2):
         tileset = GBTileset()
         assert tileset.add_tile(tile1, dedup=True) == 0
@@ -131,3 +136,20 @@ class Test_GBTileset(object):
         tileset2 = GBTileset.from_image(image)
         tileset1.merge(tileset2, dedup=True)
         assert tileset1.length == 5
+
+    def test_index(self, tile1):
+        tileset = GBTileset()
+        tileset.add_tile(tile1)
+        assert tileset.index(tile1) == 0
+
+    def test_index_with_offset(self, tile1):
+        tileset = GBTileset(offset=10)
+        tileset.add_tile(tile1)
+        assert tileset.index(tile1) == 10
+
+    def test_offset(self, tile1):
+        tileset = GBTileset()
+        tileset.add_tile(tile1)
+        assert tileset.index(tile1) == 0
+        tileset.offset = 10
+        assert tileset.index(tile1) == 10

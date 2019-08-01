@@ -32,6 +32,13 @@ class Test_GBTilemap(object):
         tilemap.put_tile(0, 0, tileset.tiles[4])
         assert tilemap.data[0] == 4
 
+    def test_put_tile_with_offset(self, tileset):
+        tileset.offset = 10
+        tilemap = GBTilemap(gbtileset=tileset)
+        assert tilemap.data[0] == 0
+        tilemap.put_tile(0, 0, tileset.tiles[4])
+        assert tilemap.data[0] == 14
+
     @pytest.mark.parametrize("x,y", [
         (-1, 0),
         (0, -1),

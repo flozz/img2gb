@@ -170,7 +170,7 @@ class GBTilemap(object):
             raise ValueError("Wrong value '%s' for the missing argument. Authorised values are 'append', 'error' and 'replace'.")  # noqa
 
         if gbtile in self._tileset.tiles and dedup:
-            tile_id = self._tileset.tiles.index(gbtile)
+            tile_id = self._tileset.index(gbtile)
         else:
             if missing == "append":
                 tile_id = self._tileset.add_tile(gbtile, dedup=dedup)

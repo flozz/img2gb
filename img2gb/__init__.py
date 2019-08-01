@@ -183,13 +183,10 @@ def generate_tilemap(
             output_h=open("tilemap.h", "w"))
 
     """
-    if offset:
-        raise NotImplementedError()  # TODO
-
     if missing == "append":
         raise ValueError("missing=append is not available from high level functions")  # noqa
 
-    tileset = GBTileset.from_image(input_tileset, dedup=False)
+    tileset = GBTileset.from_image(input_tileset, dedup=False, offset=offset)
     tilemap = GBTilemap.from_image(
             input_tilemap_image,
             gbtileset=tileset,
