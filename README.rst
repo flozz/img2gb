@@ -45,13 +45,20 @@ Links
 Changelog
 ---------
 
+* **1.1.0:**
+
+  * Removes arbitrary size limit for tilmaps
+  * Implements ``offset`` option (#2)
+
 * **1.0.0:**
+
   * Refacto of the Python API, with new high-level fuction to be easier to use
   * Refacto of the CLI: now tileset and tilemap are generated separately, this allow more options for both and covers more usecases.
   * New option to handle alternative palette
   * New option to handle 8x16px sprites
   * Documentation
   * Unit test (everything is not coverd but it is better than nothing :))
+
 * **0.10.0:** Adds non-RGB image support (indexed images,...)
 * **0.9.1:** Fixes an issue with Python 3
 * **0.9.0:** Initial release (generates tiles, tilesets and tilemaps)
