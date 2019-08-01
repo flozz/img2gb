@@ -181,8 +181,16 @@
 </div>
 <dl class="class">
 <dt id="img2gb.gbtileset.GBTileset">
-<em class="property">class </em><code class="descclassname">img2gb.gbtileset.</code><code class="descname">GBTileset</code><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">img2gb.gbtileset.</code><code class="descname">GBTileset</code><span class="sig-paren">(</span><em>offset=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stores and manipulate a GameBoy tileset (up to 255 tiles).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offset</strong> (<em>int</em>) – An offset to apply to tile ids.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="img2gb.gbtileset.GBTileset.add_tile">
 <code class="descname">add_tile</code><span class="sig-paren">(</span><em>gbtile</em>, <em>dedup=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.add_tile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.add_tile" title="Permalink to this definition">¶</a></dt>
@@ -202,7 +210,7 @@ no identical tile in the tileset (default =
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">int</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The id of the tile in the tileset.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The id of the tile in the tileset (including offset).</p>
 </td>
 </tr>
 </tbody>
@@ -225,7 +233,7 @@ no identical tile in the tileset (default =
 
 <dl class="classmethod">
 <dt id="img2gb.gbtileset.GBTileset.from_image">
-<em class="property">classmethod </em><code class="descname">from_image</code><span class="sig-paren">(</span><em>pil_image</em>, <em>dedup=False</em>, <em>alternative_palette=False</em>, <em>sprite8x16=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.from_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.from_image" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_image</code><span class="sig-paren">(</span><em>pil_image</em>, <em>dedup=False</em>, <em>alternative_palette=False</em>, <em>sprite8x16=False</em>, <em>offset=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.from_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.from_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new GBTileset from the given image.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -239,6 +247,7 @@ no identical tile in the tileset (default =
 (inverted colors, default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
 <li><strong>sprite8x16</strong> (<em>bool</em>) – Rearrange the tiles to be used in 8x16 sprites
 (default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+<li><strong>offset</strong> (<em>int</em>) – An offset to apply to tile ids.</li>
 </ul>
 </td>
 </tr>
@@ -254,6 +263,24 @@ no identical tile in the tileset (default =
 <li>The image can contain up to 255 different tiles.</li>
 </ul>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="img2gb.gbtileset.GBTileset.index">
+<code class="descname">index</code><span class="sig-paren">(</span><em>gbtile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the id of the given tile in the tileset (including offset).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gbtile</strong> (<a class="reference internal" href="gbtile.html#img2gb.gbtile.GBTile" title="img2gb.gbtile.GBTile"><em>GBTile</em></a>) – The tile.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The id of the tile in the tileset (including offset).</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -273,7 +300,7 @@ no identical tile in the tileset (default =
 <dl class="method">
 <dt id="img2gb.gbtileset.GBTileset.merge">
 <code class="descname">merge</code><span class="sig-paren">(</span><em>gbtileset</em>, <em>dedup=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtileset.html#GBTileset.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.gbtileset.GBTileset.merge" title="Permalink to this definition">¶</a></dt>
-<dd><p>Merge the tiles of the given tileset in the current tileset.</p>
+<dd><p>Merges the tiles of the given tileset in the current tileset.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -284,6 +311,20 @@ no identical tile in the tileset (default =
 the current tileset (default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="img2gb.gbtileset.GBTileset.offset">
+<code class="descname">offset</code><a class="headerlink" href="#img2gb.gbtileset.GBTileset.offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>An offset applied to each tiles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>

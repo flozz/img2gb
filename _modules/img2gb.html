@@ -330,13 +330,10 @@
 <span class="sd">            output_h=open(&quot;tilemap.h&quot;, &quot;w&quot;))</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">offset</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>  <span class="c1"># TODO</span>
-
     <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s2">&quot;append&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;missing=append is not available from high level functions&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
-    <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">input_tileset</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">input_tileset</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
     <span class="n">tilemap</span> <span class="o">=</span> <span class="n">GBTilemap</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
             <span class="n">input_tilemap_image</span><span class="p">,</span>
             <span class="n">gbtileset</span><span class="o">=</span><span class="n">tileset</span><span class="p">,</span>

@@ -178,7 +178,10 @@
 
 
 <div class="viewcode-block" id="GBTileset"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset">[docs]</a><span class="k">class</span> <span class="nc">GBTileset</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Stores and manipulate a GameBoy tileset (up to 255 tiles).&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Stores and manipulate a GameBoy tileset (up to 255 tiles).</span>
+
+<span class="sd">    :param int offset: An offset to apply to tile ids.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="GBTileset.from_image"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.from_image">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_image</span><span class="p">(</span>
@@ -187,6 +190,7 @@
             <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">alternative_palette</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">sprite8x16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">offset</span><span class="o">=</span><span class="mi">0</span>
             <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a new GBTileset from the given image.</span>
 
@@ -197,6 +201,7 @@
 <span class="sd">                (inverted colors, default = ``False``).</span>
 <span class="sd">        :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites</span>
 <span class="sd">                (default = ``False``).</span>
+<span class="sd">        :param int offset: An offset to apply to tile ids.</span>
 <span class="sd">        :rtype: GBTileset</span>
 
 <span class="sd">        .. NOTE::</span>
@@ -215,7 +220,7 @@
 
         <span class="c1"># TODO check tile count &lt;= 255</span>
 
-        <span class="n">tileset</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">()</span>
+        <span class="n">tileset</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">tile_x</span><span class="p">,</span> <span class="n">tile_y</span> <span class="ow">in</span> <span class="n">tileset_iterator</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">sprite8x16</span><span class="p">):</span>
             <span class="n">tile</span> <span class="o">=</span> <span class="n">GBTile</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
@@ -228,8 +233,21 @@
 
         <span class="k">return</span> <span class="n">tileset</span></div>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An offset applied to each tiles.</span>
+
+<span class="sd">        :type: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span>
+
+    <span class="nd">@offset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span> <span class="o">=</span> <span class="n">offset</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -267,16 +285,16 @@
 <span class="sd">                           ``False``).</span>
 
 <span class="sd">        :rtype: int</span>
-<span class="sd">        :returns: The id of the tile in the tileset.</span>
+<span class="sd">        :returns: The id of the tile in the tileset (including offset).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">dedup</span> <span class="ow">and</span> <span class="n">gbtile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span>
         <span class="c1"># TODO check tile count &lt;= 255</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span></div>
 
 <div class="viewcode-block" id="GBTileset.merge"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gbtileset</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Merge the tiles of the given tileset in the current tileset.</span>
+        <span class="sd">&quot;&quot;&quot;Merges the tiles of the given tileset in the current tileset.</span>
 
 <span class="sd">        :param GBTileset gbtileset: The tileset to merge into the current one.</span>
 <span class="sd">        :param bool dedup: Add only the tiles that are note already present in</span>
@@ -284,6 +302,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">gbtileset</span><span class="o">.</span><span class="n">tiles</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="n">dedup</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GBTileset.index"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gbtile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the id of the given tile in the tileset (including offset).</span>
+
+<span class="sd">        :param GBTile gbtile: The tile.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :returns: The id of the tile in the tileset (including offset).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tiles</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offset</span></div>
 
 <div class="viewcode-block" id="GBTileset.to_hex_string"><a class="viewcode-back" href="../../api/gbtileset.html#img2gb.gbtileset.GBTileset.to_hex_string">[docs]</a>    <span class="k">def</span> <span class="nf">to_hex_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the tileset as an hexadecimal-encoded string (one tile per</span>

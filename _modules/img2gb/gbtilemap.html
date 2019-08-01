@@ -187,8 +187,8 @@
 
     <span class="sd">&quot;&quot;&quot;Stores and manipulates GameBoy tilemaps.</span>
 
-<span class="sd">    :param int width: With of the tilemap in tile (0-32, default = ``32``).</span>
-<span class="sd">    :param int height: Height of the tilemap in tile (0-32, default = ``32``).</span>
+<span class="sd">    :param int width: With of the tilemap in tile (default = ``32``).</span>
+<span class="sd">    :param int height: Height of the tilemap in tile (default = ``32``).</span>
 <span class="sd">    :param GBTileset gbtileset: The tileset to use (a new empty one will be</span>
 <span class="sd">                                created if set to ``None``, default =</span>
 <span class="sd">                                ``None``).</span>
@@ -227,9 +227,6 @@
 
         <span class="k">if</span> <span class="n">width</span> <span class="o">%</span> <span class="mi">8</span> <span class="ow">or</span> <span class="n">height</span> <span class="o">%</span> <span class="mi">8</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input image width and height must be a multiple of 8&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
-
-        <span class="k">if</span> <span class="n">width</span> <span class="o">&gt;</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">8</span> <span class="ow">or</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">32</span> <span class="o">*</span> <span class="mi">8</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input image maximum with and height is 256x256 px (32x32 tiles)&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
         <span class="n">tilemap</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">8</span><span class="p">,</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">8</span><span class="p">,</span> <span class="n">gbtileset</span><span class="o">=</span><span class="n">gbtileset</span><span class="p">)</span>
 
@@ -322,7 +319,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Wrong value &#39;</span><span class="si">%s</span><span class="s2">&#39; for the missing argument. Authorised values are &#39;append&#39;, &#39;error&#39; and &#39;replace&#39;.&quot;</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
         <span class="k">if</span> <span class="n">gbtile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tileset</span><span class="o">.</span><span class="n">tiles</span> <span class="ow">and</span> <span class="n">dedup</span><span class="p">:</span>
-            <span class="n">tile_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tileset</span><span class="o">.</span><span class="n">tiles</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span>
+            <span class="n">tile_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tileset</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gbtile</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s2">&quot;append&quot;</span><span class="p">:</span>
                 <span class="n">tile_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tileset</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">gbtile</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="n">dedup</span><span class="p">)</span>
