@@ -38,8 +38,8 @@ class GBTilemap(object):
 
     """Stores and manipulates GameBoy tilemaps.
 
-    :param int width: With of the tilemap in tile (0-32, default = ``32``).
-    :param int height: Height of the tilemap in tile (0-32, default = ``32``).
+    :param int width: With of the tilemap in tile (default = ``32``).
+    :param int height: Height of the tilemap in tile (default = ``32``).
     :param GBTileset gbtileset: The tileset to use (a new empty one will be
                                 created if set to ``None``, default =
                                 ``None``).

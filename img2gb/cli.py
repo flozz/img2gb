@@ -45,7 +45,7 @@ def generate_tileset_cli(parser):
             "--alternative-palette",
             action="store_true",
             default=False,
-            help="invert the colors to allow tiles to be used with the sprites alternative palette"  # noqa
+            help="invert the colors"
             )
     parser.add_argument(
             "-s",
