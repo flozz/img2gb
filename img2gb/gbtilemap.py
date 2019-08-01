@@ -79,9 +79,6 @@ class GBTilemap(object):
         if width % 8 or height % 8:
             raise ValueError("The input image width and height must be a multiple of 8")  # noqa
 
-        if width > 32 * 8 or height > 32 * 8:
-            raise ValueError("The input image maximum with and height is 256x256 px (32x32 tiles)")  # noqa
-
         tilemap = Cls(width / 8, height / 8, gbtileset=gbtileset)
 
         for tile_y in range(0, height, 8):
