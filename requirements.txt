@@ -13,7 +13,7 @@ MarkupSafe==1.1.0
 more-itertools==5.0.0
 packaging==18.0
 pathlib2==2.3.3
-Pillow==8.1.1
+Pillow==8.3.2
 pluggy==0.8.0
 py==1.7.0
 Pygments==2.3.1
