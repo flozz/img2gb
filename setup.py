@@ -30,6 +30,14 @@ setup(
         "pillow>=5.0.0",
         ],
 
+    extras_require={
+        "dev": [
+            "nox",
+            "flake8",
+            "pytest",
+            "black",
+        ]
+    },
     entry_points={
         "console_scripts": [
             "img2gb = img2gb.__main__:main"

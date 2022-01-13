@@ -33,6 +33,38 @@ Usage
 * See https://flozz.github.io/img2gb/cli.html
 
 
+Hacking
+-------
+
+To work on img2gb first create a virtualenv::
+
+    python3 -m venv __env__
+
+and activate it::
+
+    source __env__/bin/activate
+
+Then install the project will all devs dependencies::
+
+    pip install -e .[dev]
+
+You can now lint the code::
+
+    nox -s lint
+
+You can fix codding style using Black::
+
+    nox -s black_fix
+
+And you can run tests::
+
+    nox -s test       # Run on all Python version
+    nox -s test-3.7   # Run on Python 3.7
+    nox -s test-3.8   # Run on Python 3.8
+    nox -s test-3.9   # Run on Python 3.9
+    nox -s test-3.10  # Run on Python 3.10
+
+
 Links
 -----
 
