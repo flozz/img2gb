@@ -20,7 +20,6 @@ setup(
     keywords="gb gameboy image tile tileset tilemap",
     author="Fabien LOISON",
     packages=find_packages(),
-    setup_requires=["cffi>=1.0.0"],
     install_requires=[
         "pillow>=5.0.0",
     ],
@@ -30,6 +29,8 @@ setup(
             "flake8",
             "pytest",
             "black",
+            "sphinx",
+            "sphinx-rtd-theme",
         ]
     },
     entry_points={

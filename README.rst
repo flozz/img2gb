@@ -59,6 +59,7 @@ You can fix codding style using Black::
 And you can run tests::
 
     nox -s test       # Run on all Python version
+
     nox -s test-3.7   # Run on Python 3.7
     nox -s test-3.8   # Run on Python 3.8
     nox -s test-3.9   # Run on Python 3.9
