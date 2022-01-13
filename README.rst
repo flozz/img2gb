@@ -36,6 +36,9 @@ Usage
 Hacking
 -------
 
+Setup
+~~~~~
+
 To work on img2gb first create a virtualenv::
 
     python3 -m venv __env__
@@ -44,19 +47,24 @@ and activate it::
 
     source __env__/bin/activate
 
-Then install the project will all devs dependencies::
+Then install the project with all dev dependencies::
 
     pip install -e .[dev]
 
-You can now lint the code::
+
+Commands
+~~~~~~~~
+
+You can lint the code and check coding style with::
 
     nox -s lint
 
-You can fix codding style using Black::
+You can fix coding style using Black with::
 
     nox -s black_fix
 
-You can run tests::
+You can run test on all supported Python versions or on a specific Python
+version with::
 
     nox -s test       # Run on all Python version
 
@@ -65,7 +73,7 @@ You can run tests::
     nox -s test-3.9   # Run on Python 3.9
     nox -s test-3.10  # Run on Python 3.10
 
-And you can build the documentation with::
+And you can build the documentation with (result in ``build/html/``)::
 
     nox -s gendoc
 
