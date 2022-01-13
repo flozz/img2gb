@@ -56,7 +56,7 @@ You can fix codding style using Black::
 
     nox -s black_fix
 
-And you can run tests::
+You can run tests::
 
     nox -s test       # Run on all Python version
 
@@ -64,6 +64,10 @@ And you can run tests::
     nox -s test-3.8   # Run on Python 3.8
     nox -s test-3.9   # Run on Python 3.9
     nox -s test-3.10  # Run on Python 3.10
+
+And you can build the documentation with::
+
+    nox -s gendoc
 
 
 Links
