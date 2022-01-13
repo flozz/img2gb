@@ -1,65 +1,34 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>High-Level Functions &mdash; img2gb  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="GBTile" href="gbtile.html" />
     <link rel="prev" title="Python API" href="index.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
+        <div class="wy-side-nav-search" >
             <a href="../index.html" class="icon icon-home"> img2gb
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -67,18 +36,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installing img2gb</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../howto.html">Howto Generate a Tileset and a Tilemap (CLI)</a></li>
@@ -97,116 +56,73 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">img2gb</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="index.html">Python API</a> &raquo;</li>
-        
       <li>High-Level Functions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/api/high-level-functions.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="high-level-functions">
-<h1>High-Level Functions<a class="headerlink" href="#high-level-functions" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="high-level-functions">
+<h1>High-Level Functions<a class="headerlink" href="#high-level-functions" title="Permalink to this headline"></a></h1>
 <p>You will find bellow the high-level function to easily generate tilesets and
 tilemaps.</p>
-<div class="section" id="generating-tilesets">
-<h2>Generating Tilesets<a class="headerlink" href="#generating-tilesets" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="img2gb.generate_tileset">
-<code class="descclassname">img2gb.</code><code class="descname">generate_tileset</code><span class="sig-paren">(</span><em>input_images</em>, <em>output_c=None</em>, <em>output_h=None</em>, <em>output_image=None</em>, <em>name='TILESET'</em>, <em>dedup=False</em>, <em>alternative_palette=False</em>, <em>sprite8x16=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tileset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.generate_tileset" title="Permalink to this definition">¶</a></dt>
+<section id="generating-tilesets">
+<h2>Generating Tilesets<a class="headerlink" href="#generating-tilesets" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="img2gb.generate_tileset">
+<span class="sig-prename descclassname"><span class="pre">img2gb.</span></span><span class="sig-name descname"><span class="pre">generate_tileset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILESET'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative_palette</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sprite8x16</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tileset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.generate_tileset" title="Permalink to this definition"></a></dt>
 <dd><p>Function that generates tileset’s C file, C header and image from an
 input image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>input_images</strong> (<em>PIL.Image.Image|list</em>) – The input image to generate the
-tileset from.</li>
-<li><strong>output_c</strong> (<em>file</em>) – A file-like object where the C code will be generated
-(<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C code).</li>
-<li><strong>output_h</strong> (<em>file</em>) – A file-like object where the C header (.h) code will
-be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C header code).</li>
-<li><strong>output_image</strong> (<em>file</em>) – <p>A file-like object where the image representing
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_images</strong> (<em>PIL.Image.Image</em><em>|</em><em>list</em>) – The input image to generate the
+tileset from.</p></li>
+<li><p><strong>output_c</strong> (<em>file</em>) – A file-like object where the C code will be generated
+(<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C code).</p></li>
+<li><p><strong>output_h</strong> (<em>file</em>) – A file-like object where the C header (.h) code will
+be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C header code).</p></li>
+<li><p><strong>output_image</strong> (<em>file</em>) – <p>A file-like object where the image representing
 the tileset will be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate the image).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The file must be openend in binary mode (<code class="docutils literal notranslate"><span class="pre">open(&quot;file&quot;,</span> <span class="pre">&quot;wb&quot;)</span></code>)
+<p class="admonition-title">Note</p>
+<p>The file must be openend in binary mode (<code class="docutils literal notranslate"><span class="pre">open(&quot;file&quot;,</span> <span class="pre">&quot;wb&quot;)</span></code>)
 or you must be using a binary-compatible file-like object, like
 a <code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code>.</p>
 </div>
-</li>
-<li><strong>name</strong> (<em>str</em>) – The name of the tileset (will be used in the generated
-code, default = <code class="docutils literal notranslate"><span class="pre">&quot;TILESET&quot;</span></code>)</li>
-<li><strong>dedup</strong> (<em>bool</em>) – Deduplicate the tiles of the tileset (default =
-<code class="docutils literal notranslate"><span class="pre">False</span></code>)</li>
-<li><strong>alternative_palette</strong> (<em>bool</em>) – Use the sprite’s alternative palette
-(inverted colors, default = <code class="docutils literal notranslate"><span class="pre">False</span></code>)</li>
-<li><strong>sprite8x16</strong> (<em>bool</em>) – Rearrange the tiles to be used in 8x16 sprites
-(default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</li>
+</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the tileset (will be used in the generated
+code, default = <code class="docutils literal notranslate"><span class="pre">&quot;TILESET&quot;</span></code>)</p></li>
+<li><p><strong>dedup</strong> (<em>bool</em>) – Deduplicate the tiles of the tileset (default =
+<code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><strong>alternative_palette</strong> (<em>bool</em>) – Use the sprite’s alternative palette
+(inverted colors, default = <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><strong>sprite8x16</strong> (<em>bool</em>) – Rearrange the tiles to be used in 8x16 sprites
+(default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p>Example using files:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">img2gb</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;./my_tileset.png&quot;</span><span class="p">)</span>
@@ -227,8 +143,8 @@ code, default = <code class="docutils literal notranslate"><span class="pre">&qu
 </pre></div>
 </div>
 <p>Example using file-like objects:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">BytesIO</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">img2gb</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;./my_tileset.png&quot;</span><span class="p">)</span>
@@ -251,129 +167,97 @@ code, default = <code class="docutils literal notranslate"><span class="pre">&qu
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="generating-tilemaps">
-<h2>Generating Tilemaps<a class="headerlink" href="#generating-tilemaps" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="img2gb.generate_tilemap">
-<code class="descclassname">img2gb.</code><code class="descname">generate_tilemap</code><span class="sig-paren">(</span><em>input_tileset</em>, <em>input_tilemap_image</em>, <em>output_c=None</em>, <em>output_h=None</em>, <em>name='TILEMAP'</em>, <em>offset=0</em>, <em>missing='error'</em>, <em>replace=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tilemap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#img2gb.generate_tilemap" title="Permalink to this definition">¶</a></dt>
+</section>
+<section id="generating-tilemaps">
+<h2>Generating Tilemaps<a class="headerlink" href="#generating-tilemaps" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="img2gb.generate_tilemap">
+<span class="sig-prename descclassname"><span class="pre">img2gb.</span></span><span class="sig-name descname"><span class="pre">generate_tilemap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_tileset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_tilemap_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'error'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tilemap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.generate_tilemap" title="Permalink to this definition"></a></dt>
 <dd><p>Function that generates tilemap’s C file and C header from an input
 tileset and image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>input_tileset</strong> (<em>PIL.Image.Image</em>) – The tileset that contains the tiles
-used in the tilemap.</li>
-<li><strong>input_tilemap_image</strong> (<em>PIL.Image.Image</em>) – An image that represents the
-tilemap (its size must be a multiple of 8 and 256x256px maximum).</li>
-<li><strong>output_c</strong> (<em>file</em>) – A file-like object where the C code will be generated
-(<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C code).</li>
-<li><strong>output_h</strong> (<em>file</em>) – A file-like object where the C header (.h) code will
-be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C header code).</li>
-<li><strong>name</strong> (<em>str</em>) – The name of the tilemap (will be used in the generated
-code, default = <code class="docutils literal notranslate"><span class="pre">&quot;TILEMAP&quot;</span></code>).</li>
-<li><strong>offset</strong> (<em>int</em>) – Offset where the tileset starts (useful only of you will
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_tileset</strong> (<em>PIL.Image.Image</em>) – The tileset that contains the tiles
+used in the tilemap.</p></li>
+<li><p><strong>input_tilemap_image</strong> (<em>PIL.Image.Image</em>) – An image that represents the
+tilemap (its size must be a multiple of 8 and 256x256px maximum).</p></li>
+<li><p><strong>output_c</strong> (<em>file</em>) – A file-like object where the C code will be generated
+(<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C code).</p></li>
+<li><p><strong>output_h</strong> (<em>file</em>) – A file-like object where the C header (.h) code will
+be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C header code).</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the tilemap (will be used in the generated
+code, default = <code class="docutils literal notranslate"><span class="pre">&quot;TILEMAP&quot;</span></code>).</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – Offset where the tileset starts (useful only of you will
 load the given tileset at a place different from <code class="docutils literal notranslate"><span class="pre">0</span></code> in the
-GameBoy video memeory).</li>
-<li><strong>missing</strong> (<em>string</em>) – <p>Action to do if a tile of the tilemap is missing
+GameBoy video memeory).</p></li>
+<li><p><strong>missing</strong> (<em>string</em>) – <p>Action to do if a tile of the tilemap is missing
 from the tileset:</p>
 <ul>
-<li><code class="docutils literal notranslate"><span class="pre">&quot;error&quot;</span></code> (default): raise an error,</li>
-<li><code class="docutils literal notranslate"><span class="pre">&quot;replace&quot;</span></code>: replace the missing tile by an other one (see
-<code class="docutils literal notranslate"><span class="pre">replace</span></code> option).</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;error&quot;</span></code> (default): raise an error,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;replace&quot;</span></code>: replace the missing tile by an other one (see
+<code class="docutils literal notranslate"><span class="pre">replace</span></code> option).</p></li>
 </ul>
-</li>
-<li><strong>replace</strong> (<em>int</em>) – The id of the replacement tile when
-<code class="docutils literal notranslate"><span class="pre">missing=&quot;replace&quot;</span></code>.</li>
+</p></li>
+<li><p><strong>replace</strong> (<em>int</em>) – The id of the replacement tile when
+<code class="docutils literal notranslate"><span class="pre">missing=&quot;replace&quot;</span></code>.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p>Example:</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">io</span> <span class="n">import</span> <span class="n">BytesIO</span>
-<span class="n">from</span> <span class="n">PIL</span> <span class="n">import</span> <span class="n">Image</span>
-<span class="n">import</span> <span class="n">img2gb</span>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">from</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="n">import</span><span class="w"> </span><span class="n">BytesIO</span><span class="w"></span>
+<span class="n">from</span><span class="w"> </span><span class="n">PIL</span><span class="w"> </span><span class="n">import</span><span class="w"> </span><span class="n">Image</span><span class="w"></span>
+<span class="n">import</span><span class="w"> </span><span class="n">img2gb</span><span class="w"></span>
 
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;./my_tilemap.png&quot;</span><span class="p">)</span>
+<span class="n">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Image</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;./my_tilemap.png&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># Generate the tileset image from the tilemap image</span>
-<span class="n">tileset_io</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-<span class="n">img2gb</span><span class="p">.</span><span class="n">generate_tileset</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">image</span><span class="p">],</span>
-    <span class="n">output_image</span><span class="o">=</span><span class="n">tileset_io</span><span class="p">,</span>
-    <span class="n">dedup</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
-<span class="n">tileset_io</span><span class="p">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tileset_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BytesIO</span><span class="p">()</span><span class="w"></span>
+<span class="n">img2gb</span><span class="p">.</span><span class="n">generate_tileset</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="p">[</span><span class="n">image</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="n">output_image</span><span class="o">=</span><span class="n">tileset_io</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">dedup</span><span class="o">=</span><span class="n">True</span><span class="p">)</span><span class="w"></span>
+<span class="n">tileset_io</span><span class="p">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp"># Generate the tilemap</span>
-<span class="n">tileset_image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">tileset_io</span><span class="p">)</span>
-<span class="n">img2gb</span><span class="p">.</span><span class="n">generate_tilemap</span><span class="p">(</span>
-    <span class="n">tileset_image</span><span class="p">,</span>
-    <span class="n">image</span><span class="p">,</span>
-    <span class="n">output_c</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;tilemap.c&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">),</span>
-    <span class="n">output_h</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;tilemap.h&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">))</span>
+<span class="n">tileset_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Image</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">tileset_io</span><span class="p">)</span><span class="w"></span>
+<span class="n">img2gb</span><span class="p">.</span><span class="n">generate_tilemap</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">tileset_image</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">image</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">output_c</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;tilemap.c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;w&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">output_h</span><span class="o">=</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;tilemap.h&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;w&quot;</span><span class="p">))</span><span class="w"></span>
 </pre></div>
 </div>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="gbtile.html" class="btn btn-neutral float-right" title="GBTile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="Python API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Python API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gbtile.html" class="btn btn-neutral float-right" title="GBTile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2018, Fabien LOISON
-
-    </p>
+    <p>&#169; Copyright 2018, Fabien LOISON.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
