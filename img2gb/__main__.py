@@ -12,28 +12,28 @@ def main(argv=sys.argv):
     if args.subcommand == "tileset":
         images = [Image.open(image) for image in args.image]
         generate_tileset(
-                images,
-                output_c=args.output_c_file,
-                output_h=args.output_header_file,
-                output_image=args.output_image,
-                name=args.name,
-                dedup=args.deduplicate,
-                alternative_palette=args.alternative_palette,
-                sprite8x16=args.sprite8x16
-                )
+            images,
+            output_c=args.output_c_file,
+            output_h=args.output_header_file,
+            output_image=args.output_image,
+            name=args.name,
+            dedup=args.deduplicate,
+            alternative_palette=args.alternative_palette,
+            sprite8x16=args.sprite8x16,
+        )
     elif args.subcommand == "tilemap":
         tileset = Image.open(args.tileset)
         tilemap = Image.open(args.tilemap)
         generate_tilemap(
-                tileset,
-                tilemap,
-                output_c=args.output_c_file,
-                output_h=args.output_header_file,
-                name=args.name,
-                offset=args.offset,
-                missing=args.missing,
-                replace=args.replace
-                )
+            tileset,
+            tilemap,
+            output_c=args.output_c_file,
+            output_h=args.output_header_file,
+            name=args.name,
+            offset=args.offset,
+            missing=args.missing,
+            replace=args.replace,
+        )
 
 
 if __name__ == "__main__":

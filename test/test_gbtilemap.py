@@ -6,7 +6,6 @@ from img2gb.gbtilemap import GBTilemap
 
 
 class Test_GBTilemap(object):
-
     @pytest.fixture
     def image(self):
         return Image.open("./test/assets/tilemap.png")
@@ -39,12 +38,15 @@ class Test_GBTilemap(object):
         tilemap.put_tile(0, 0, tileset.tiles[4])
         assert tilemap.data[0] == 14
 
-    @pytest.mark.parametrize("x,y", [
-        (-1, 0),
-        (0, -1),
-        (8, 0),
-        (0, 8),
-        ])
+    @pytest.mark.parametrize(
+        "x,y",
+        [
+            (-1, 0),
+            (0, -1),
+            (8, 0),
+            (0, 8),
+        ],
+    )
     def test_put_tile_with_out_of_map_coord(self, tile, x, y):
         tilemap = GBTilemap(width=8, height=8)
         with pytest.raises(ValueError):

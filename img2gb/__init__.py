@@ -8,14 +8,15 @@ from .version import VERSION
 
 
 def generate_tileset(
-        input_images,
-        output_c=None,
-        output_h=None,
-        output_image=None,
-        name="TILESET",
-        dedup=False,
-        alternative_palette=False,
-        sprite8x16=False):
+    input_images,
+    output_c=None,
+    output_h=None,
+    output_image=None,
+    name="TILESET",
+    dedup=False,
+    alternative_palette=False,
+    sprite8x16=False,
+):
     """Function that generates tileset's C file, C header and image from an
     input image.
 
@@ -89,19 +90,22 @@ def generate_tileset(
     """
     if type(input_images) is not list:
         tileset = GBTileset.from_image(
-                input_images,
-                dedup=dedup,
-                alternative_palette=alternative_palette,
-                sprite8x16=sprite8x16
-                )
+            input_images,
+            dedup=dedup,
+            alternative_palette=alternative_palette,
+            sprite8x16=sprite8x16,
+        )
     else:
         tileset = GBTileset()
         for image in input_images:
-            tileset.merge(GBTileset.from_image(
-                image,
-                alternative_palette=alternative_palette,
-                sprite8x16=sprite8x16
-                ), dedup=dedup)
+            tileset.merge(
+                GBTileset.from_image(
+                    image,
+                    alternative_palette=alternative_palette,
+                    sprite8x16=sprite8x16,
+                ),
+                dedup=dedup,
+            )
 
     if output_c:
         c_code = generate_c_file(tileset.to_c_string(name=name))
@@ -112,8 +116,8 @@ def generate_tileset(
         if hasattr(output_h, "name"):
             filename = os.path.basename(output_h.name)
         h_code = generate_c_header_file(
-                tileset.to_c_header_string(name=name),
-                filename=filename)
+            tileset.to_c_header_string(name=name), filename=filename
+        )
         output_h.write(h_code)
 
     if output_image:
@@ -122,14 +126,15 @@ def generate_tileset(
 
 
 def generate_tilemap(
-        input_tileset,
-        input_tilemap_image,
-        output_c=None,
-        output_h=None,
-        name="TILEMAP",
-        offset=0,
-        missing="error",
-        replace=0):
+    input_tileset,
+    input_tilemap_image,
+    output_c=None,
+    output_h=None,
+    name="TILEMAP",
+    offset=0,
+    missing="error",
+    replace=0,
+):
     """Function that generates tilemap's C file and C header from an input
     tileset and image.
 
@@ -184,15 +189,15 @@ def generate_tilemap(
 
     """
     if missing == "append":
-        raise ValueError("missing=append is not available from high level functions")  # noqa
+        raise ValueError("missing=append is not available from high level functions")
 
     tileset = GBTileset.from_image(input_tileset, dedup=False, offset=offset)
     tilemap = GBTilemap.from_image(
-            input_tilemap_image,
-            gbtileset=tileset,
-            missing=missing,
-            replace=replace,
-            )
+        input_tilemap_image,
+        gbtileset=tileset,
+        missing=missing,
+        replace=replace,
+    )
 
     if output_c:
         c_code = generate_c_file(tilemap.to_c_string(name=name))
@@ -203,16 +208,16 @@ def generate_tilemap(
         if hasattr(output_h, "name"):
             filename = os.path.basename(output_h.name)
         h_code = generate_c_header_file(
-                tilemap.to_c_header_string(name=name),
-                filename=filename)
+            tilemap.to_c_header_string(name=name), filename=filename
+        )
         output_h.write(h_code)
 
 
 __all__ = [
-        "GBTile",
-        "GBTileset",
-        "GBTilemap",
-        "generate_tileset",
-        "generate_tilemap",
-        "VERSION",
-        ]
+    "GBTile",
+    "GBTileset",
+    "GBTilemap",
+    "generate_tileset",
+    "generate_tilemap",
+    "VERSION",
+]

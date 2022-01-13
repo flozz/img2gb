@@ -47,13 +47,8 @@ class GBTilemap(object):
 
     @classmethod
     def from_image(
-            Cls,
-            pil_image,
-            gbtileset=None,
-            missing="append",
-            replace=0,
-            dedup=True
-            ):
+        Cls, pil_image, gbtileset=None, missing="append", replace=0, dedup=True
+    ):
         """Generates the tilemap from the given image. The tileset can also be
         generated at the same time.
 
@@ -77,7 +72,7 @@ class GBTilemap(object):
         width, height = image.size
 
         if width % 8 or height % 8:
-            raise ValueError("The input image width and height must be a multiple of 8")  # noqa
+            raise ValueError("The input image width and height must be a multiple of 8")
 
         tilemap = Cls(width / 8, height / 8, gbtileset=gbtileset)
 
@@ -85,13 +80,13 @@ class GBTilemap(object):
             for tile_x in range(0, width, 8):
                 tile = GBTile.from_image(image, tile_x, tile_y)
                 tilemap.put_tile(
-                        tile_x / 8,
-                        tile_y / 8,
-                        tile,
-                        missing=missing,
-                        replace=replace,
-                        dedup=dedup
-                        )
+                    tile_x / 8,
+                    tile_y / 8,
+                    tile,
+                    missing=missing,
+                    replace=replace,
+                    dedup=dedup,
+                )
 
         return tilemap
 
@@ -162,12 +157,18 @@ class GBTilemap(object):
         if x < 0 or y < 0:
             raise ValueError("x and y coordinates cannot be negative")
         if x >= self._width:
-            raise ValueError("The x coordinate is greater than the width of the tilemap")  # noqa
+            raise ValueError(
+                "The x coordinate is greater than the width of the tilemap"
+            )
         if y >= self._height:
-            raise ValueError("The y coordinate is greater than the height of the tilemap")  # noqa
+            raise ValueError(
+                "The y coordinate is greater than the height of the tilemap"
+            )
 
         if missing not in ("append", "error", "replace"):
-            raise ValueError("Wrong value '%s' for the missing argument. Authorised values are 'append', 'error' and 'replace'.")  # noqa
+            raise ValueError(
+                "Wrong value '%s' for the missing argument. Authorised values are 'append', 'error' and 'replace'."
+            )
 
         if gbtile in self._tileset.tiles and dedup:
             tile_id = self._tileset.index(gbtile)

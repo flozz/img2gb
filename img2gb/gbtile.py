@@ -23,17 +23,14 @@ Creating a tile from a PIL image::
 
 from PIL import Image
 
-from .helpers import (
-        to_pil_rgb_image,
-        rgba_brightness,
-        brightness_to_color_id)
+from .helpers import to_pil_rgb_image, rgba_brightness, brightness_to_color_id
 
 
 class GBTile(object):
     """Stores and manipulates data of a single GameBoy tile (8x8 pixels)."""
 
     @classmethod
-    def from_image(Cls, pil_image, tile_x=0, tile_y=0, alternative_palette=False):  # noqa
+    def from_image(Cls, pil_image, tile_x=0, tile_y=0, alternative_palette=False):
         """Create a new GBTile from the given image.
 
         :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.
@@ -54,9 +51,8 @@ class GBTile(object):
                 pix_rgb = image.getpixel((tile_x + x, tile_y + y))
                 pix_brightness = rgba_brightness(*pix_rgb)
                 color_id = brightness_to_color_id(
-                        pix_brightness,
-                        invert=alternative_palette
-                        )
+                    pix_brightness, invert=alternative_palette
+                )
                 tile.put_pixel(x, y, color_id)
 
         return tile
@@ -84,12 +80,12 @@ class GBTile(object):
         mask2 = mask if color_id & 0b10 else 0b00000000
 
         # Clear changing bits
-        self._data[y*2+0] &= ~mask
-        self._data[y*2+1] &= ~mask
+        self._data[y * 2 + 0] &= ~mask
+        self._data[y * 2 + 1] &= ~mask
 
         # Set bits
-        self._data[y*2+0] |= mask1
-        self._data[y*2+1] |= mask2
+        self._data[y * 2 + 0] |= mask1
+        self._data[y * 2 + 1] |= mask2
 
     def get_pixel(self, x, y):
         """Returns the color id of a pixel of the tile.
@@ -99,8 +95,8 @@ class GBTile(object):
         :rtype: int
         """
         mask = 0b00000001 << (7 - x)
-        lbit = (self._data[y*2+0] & mask) >> (7 - x)
-        hbit = (self._data[y*2+1] & mask) >> (7 - x)
+        lbit = (self._data[y * 2 + 0] & mask) >> (7 - x)
+        hbit = (self._data[y * 2 + 1] & mask) >> (7 - x)
         return hbit * 0b10 + lbit
 
     def to_hex_string(self):
@@ -121,12 +117,16 @@ class GBTile(object):
         :rtype: PIL.Image.Image
         """
         image = Image.new("P", (8, 8), 0)
-        image.putpalette([
+        image.putpalette(
+            [
+                # fmt: off
                 0xFF, 0xFF, 0xFF,
                 0xBB, 0xBB, 0xBB,
                 0x55, 0x55, 0x55,
                 0x00, 0x00, 0x00,
-                ])
+                # fmt: on
+            ]
+        )
         for y in range(8):
             for x in range(8):
                 image.putpixel((x, y), self.get_pixel(x, y))

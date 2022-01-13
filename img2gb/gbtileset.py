@@ -36,13 +36,13 @@ class GBTileset(object):
 
     @classmethod
     def from_image(
-            Cls,
-            pil_image,
-            dedup=False,
-            alternative_palette=False,
-            sprite8x16=False,
-            offset=0
-            ):
+        Cls,
+        pil_image,
+        dedup=False,
+        alternative_palette=False,
+        sprite8x16=False,
+        offset=0,
+    ):
         """Create a new GBTileset from the given image.
 
         :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.
@@ -64,10 +64,12 @@ class GBTileset(object):
         width, height = image.size
 
         if width % 8 or height % 8:
-            raise ValueError("The input image width and height must be a multiple of 8")  # noqa
+            raise ValueError("The input image width and height must be a multiple of 8")
 
         if height % 16 and sprite8x16:
-            raise ValueError("The input image height must be a multiple of 16 when sprite8x16=True")  # noqa
+            raise ValueError(
+                "The input image height must be a multiple of 16 when sprite8x16=True"
+            )
 
         # TODO check tile count <= 255
 
@@ -75,11 +77,8 @@ class GBTileset(object):
 
         for tile_x, tile_y in tileset_iterator(width, height, sprite8x16):
             tile = GBTile.from_image(
-                    image,
-                    tile_x,
-                    tile_y,
-                    alternative_palette=alternative_palette
-                    )
+                image, tile_x, tile_y, alternative_palette=alternative_palette
+            )
             tileset.add_tile(tile, dedup=dedup)
 
         return tileset
@@ -200,7 +199,7 @@ class GBTileset(object):
                 0x3C, 0x00, 0x54, 0x2A, 0xA3, 0x5F, 0xC1, 0x3F, 0x83, 0x7F, 0xC5, 0x3F, 0x2A, 0x7E, 0x3C, 0x3C,
                 0x04, 0x04, 0x04, 0x04, 0x0A, 0x0A, 0x12, 0x12, 0x66, 0x00, 0x99, 0x77, 0x99, 0x77, 0x66, 0x66,
             };
-        """  # noqa
+        """
         c = "const UINT8 %s[] = {\n" % name.upper()
         for tile in self._tiles:
             c += "    %s,\n" % ", ".join(["0x%02X" % b for b in tile.data])
@@ -240,17 +239,21 @@ class GBTileset(object):
             height = (self.length // 16 + bool(self.length % 16)) * 8
 
         image = Image.new("P", (width, height))
-        image.putpalette([
+        image.putpalette(
+            [
+                # fmt: off
                 0xFF, 0xFF, 0xFF,
                 0xBB, 0xBB, 0xBB,
                 0x55, 0x55, 0x55,
                 0x00, 0x00, 0x00,
-                ])
+                # fmt: on
+            ]
+        )
 
         for i in range(self.length):
             tile_image = self._tiles[i].to_image()
-            x = (i*8) % width
-            y = (i*8) // width * 8
+            x = (i * 8) % width
+            y = (i * 8) // width * 8
             image.paste(tile_image, (x, y))
 
         return image

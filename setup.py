@@ -16,20 +16,14 @@ setup(
     description="Converts images to GameBoy tileset",
     url="",
     license="BSD-3-Clause",
-
     long_description=long_description,
     keywords="gb gameboy image tile tileset tilemap",
-
     author="Fabien LOISON",
-    # author_email="",
-
     packages=find_packages(),
-
     setup_requires=["cffi>=1.0.0"],
     install_requires=[
         "pillow>=5.0.0",
-        ],
-
+    ],
     extras_require={
         "dev": [
             "nox",
@@ -40,7 +34,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "img2gb = img2gb.__main__:main"
-        ]},
-
+            "img2gb = img2gb.__main__:main",
+        ],
+    },
 )
