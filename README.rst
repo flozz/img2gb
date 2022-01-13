@@ -1,7 +1,7 @@
 img2gb - Converts Images to GameBoy Tileset and Tilemap
 =======================================================
 
-|Build Status| |PYPI Version| |License|
+|Lint and Tests| |PYPI Version| |License|
 
     img2gb generates GameBoy Tilesets and Tilemaps from standard image (PNG,
     JPEG,...). It converts the images into the GameBoy image format and
@@ -101,9 +101,11 @@ Changelog
 * **0.9.0:** Initial release (generates tiles, tilesets and tilemaps)
 
 
-.. |Build Status| image:: https://travis-ci.org/flozz/img2gb.svg?branch=master
-   :target: https://travis-ci.org/flozz/img2gb
+.. |Lint and Tests| image:: https://github.com/flozz/img2gb/actions/workflows/python-ci.yml/badge.svg
+   :target: https://github.com/flozz/img2gb/actions
+
 .. |PYPI Version| image:: https://img.shields.io/pypi/v/img2gb.svg
    :target: https://pypi.python.org/pypi/img2gb
+
 .. |License| image:: https://img.shields.io/pypi/l/img2gb.svg
    :target: https://github.com/flozz/img2gb/blob/master/LICENSE
