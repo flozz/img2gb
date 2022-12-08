@@ -3,7 +3,7 @@ argcomplete==1.12.3
 attrs==21.4.0
 Babel==2.9.1
 black==21.12b0
-certifi==2021.10.8
+certifi==2022.12.7
 charset-normalizer==2.0.10
 click==8.0.3
 colorlog==6.6.0
