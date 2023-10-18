@@ -103,15 +103,20 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
+  * Nothing yet ;)
+
+* **v1.2.0:**
+
+  * fix: Fixed wrong version displayed (@flozz, #3)
   * chore: Added Python 3.11 and 3.12 support
   * chore!: Removed Python 2.7 and 3.7 support
 
-* **1.1.0:**
+* **v1.1.0:**
 
   * Removes arbitrary size limit for tilmaps
   * Implements ``offset`` option (#2)
 
-* **1.0.0:**
+* **v1.0.0:**
 
   * Refacto of the Python API, with new high-level fuction to be easier to use
   * Refacto of the CLI: now tileset and tilemap are generated separately, this allow more options for both and covers more usecases.
@@ -120,9 +125,9 @@ Changelog
   * Documentation
   * Unit test (everything is not coverd but it is better than nothing :))
 
-* **0.10.0:** Adds non-RGB image support (indexed images,...)
-* **0.9.1:** Fixes an issue with Python 3
-* **0.9.0:** Initial release (generates tiles, tilesets and tilemaps)
+* **v0.10.0:** Adds non-RGB image support (indexed images,...)
+* **v0.9.1:** Fixes an issue with Python 3
+* **v0.9.0:** Initial release (generates tiles, tilesets and tilemaps)
 
 
 .. |GitHub| image:: https://img.shields.io/github/stars/flozz/img2gb?label=GitHub&logo=github
