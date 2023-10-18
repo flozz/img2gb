@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d __env__ ] ; then
-    python -m virtualenv __env__
+    python -m venv __env__
     . __env__/Scripts/activate
     pip install -e .
     pip install pyinstaller
