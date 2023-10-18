@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GBTilemap &mdash; img2gb  documentation</title>
@@ -11,10 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> img2gb
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            img2gb
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,7 +51,22 @@
 <li class="toctree-l2"><a class="reference internal" href="high-level-functions.html">High-Level Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gbtile.html">GBTile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gbtileset.html">GBTileset</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">GBTilemap</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GBTilemap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap"><code class="docutils literal notranslate"><span class="pre">GBTilemap</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.data"><code class="docutils literal notranslate"><span class="pre">GBTilemap.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.from_image"><code class="docutils literal notranslate"><span class="pre">GBTilemap.from_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.height"><code class="docutils literal notranslate"><span class="pre">GBTilemap.height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.put_tile"><code class="docutils literal notranslate"><span class="pre">GBTilemap.put_tile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.size"><code class="docutils literal notranslate"><span class="pre">GBTilemap.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.tileset"><code class="docutils literal notranslate"><span class="pre">GBTilemap.tileset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.to_c_header_string"><code class="docutils literal notranslate"><span class="pre">GBTilemap.to_c_header_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.to_c_string"><code class="docutils literal notranslate"><span class="pre">GBTilemap.to_c_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.to_hex_string"><code class="docutils literal notranslate"><span class="pre">GBTilemap.to_hex_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtilemap.GBTilemap.width"><code class="docutils literal notranslate"><span class="pre">GBTilemap.width</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="c_export.html">C Export Functions</a></li>
 </ul>
 </li>
@@ -65,9 +85,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Python API</a> &raquo;</li>
-      <li>GBTilemap</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Python API</a></li>
+      <li class="breadcrumb-item active">GBTilemap</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/gbtilemap.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -78,7 +98,7 @@
            <div itemprop="articleBody">
              
   <section id="module-img2gb.gbtilemap">
-<span id="gbtilemap"></span><h1>GBTilemap<a class="headerlink" href="#module-img2gb.gbtilemap" title="Permalink to this headline"></a></h1>
+<span id="gbtilemap"></span><h1>GBTilemap<a class="headerlink" href="#module-img2gb.gbtilemap" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#img2gb.gbtilemap.GBTilemap" title="img2gb.gbtilemap.GBTilemap"><code class="xref py py-class docutils literal notranslate"><span class="pre">GBTilemap</span></code></a> class represents a GameBoy tilemap. It can map up to
 32x32 tiles that are stored in a <code class="xref py py-class docutils literal notranslate"><span class="pre">GBTileset</span></code> (if not given, a new empty
 tileset is created.</p>
@@ -107,10 +127,10 @@ tileset is created.</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">img2gb.gbtilemap.</span></span><span class="sig-name descname"><span class="pre">GBTilemap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gbtileset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">img2gb.gbtilemap.</span></span><span class="sig-name descname"><span class="pre">GBTilemap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gbtileset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap" title="Link to this definition"></a></dt>
 <dd><p>Stores and manipulates GameBoy tilemaps.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>width</strong> (<em>int</em>) – With of the tilemap in tile (default = <code class="docutils literal notranslate"><span class="pre">32</span></code>).</p></li>
 <li><p><strong>height</strong> (<em>int</em>) – Height of the tilemap in tile (default = <code class="docutils literal notranslate"><span class="pre">32</span></code>).</p></li>
@@ -122,10 +142,10 @@ created if set to <code class="docutils literal notranslate"><span class="pre">N
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.data" title="Link to this definition"></a></dt>
 <dd><p>Raw data of the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of int</p>
 </dd>
 </dl>
@@ -133,11 +153,11 @@ created if set to <code class="docutils literal notranslate"><span class="pre">N
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.from_image">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pil_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gbtileset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'append'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.from_image" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pil_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gbtileset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'append'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.from_image" title="Link to this definition"></a></dt>
 <dd><p>Generates the tilemap from the given image. The tileset can also be
 generated at the same time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pil_image</strong> (<em>PIL.Image.Image</em>) – The image that represents the
 tilemap.</p></li>
@@ -162,10 +182,10 @@ argument).</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.height">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.height" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.height" title="Link to this definition"></a></dt>
 <dd><p>The height of the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -173,10 +193,10 @@ argument).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.put_tile">
-<span class="sig-name descname"><span class="pre">put_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gbtile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'append'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.put_tile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.put_tile" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">put_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gbtile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'append'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.put_tile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.put_tile" title="Link to this definition"></a></dt>
 <dd><p>Put a tile at the given position in the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>int</em>) – The x coordinate where to put the tile in the tilemap.</p></li>
 <li><p><strong>y</strong> (<em>int</em>) – The y coordinate where to put the tile in the tilemap.</p></li>
@@ -200,10 +220,10 @@ argument).</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.size">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.size" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.size" title="Link to this definition"></a></dt>
 <dd><p>The with and height of the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple of two int <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">height)</span></code></p>
 </dd>
 </dl>
@@ -211,10 +231,10 @@ argument).</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.tileset">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tileset</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.tileset" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tileset</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.tileset" title="Link to this definition"></a></dt>
 <dd><p>The tileset that contains the tiles used by the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="gbtileset.html#img2gb.gbtileset.GBTileset" title="img2gb.gbtileset.GBTileset">GBTileset</a></p>
 </dd>
 </dl>
@@ -222,15 +242,15 @@ argument).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.to_c_header_string">
-<span class="sig-name descname"><span class="pre">to_c_header_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.to_c_header_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.to_c_header_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_c_header_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.to_c_header_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.to_c_header_string" title="Link to this definition"></a></dt>
 <dd><p>Returns the C header (.h) code for the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the variable in the generated code (always
 converted to uppercase in the generated code, default =
 <code class="docutils literal notranslate"><span class="pre">&quot;TILEMAP&quot;</span></code>)</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -238,15 +258,15 @@ converted to uppercase in the generated code, default =
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.to_c_string">
-<span class="sig-name descname"><span class="pre">to_c_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.to_c_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.to_c_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_c_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.to_c_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.to_c_string" title="Link to this definition"></a></dt>
 <dd><p>Returns C code that represents the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the variable in the generated code (always
 converted to uppercase in the generated code, default =
 <code class="docutils literal notranslate"><span class="pre">&quot;TILEMAP&quot;</span></code>)</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -254,10 +274,10 @@ converted to uppercase in the generated code, default =
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.to_hex_string">
-<span class="sig-name descname"><span class="pre">to_hex_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.to_hex_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.to_hex_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_hex_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtilemap.html#GBTilemap.to_hex_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.to_hex_string" title="Link to this definition"></a></dt>
 <dd><p>Returns the tilemap as an hexadecimal-encoded string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -272,10 +292,10 @@ converted to uppercase in the generated code, default =
 
 <dl class="py property">
 <dt class="sig sig-object py" id="img2gb.gbtilemap.GBTilemap.width">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.width" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#img2gb.gbtilemap.GBTilemap.width" title="Link to this definition"></a></dt>
 <dd><p>The width of the tilemap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>

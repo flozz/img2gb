@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GBTile &mdash; img2gb  documentation</title>
@@ -11,10 +11,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> img2gb
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            img2gb
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -44,7 +49,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="high-level-functions.html">High-Level Functions</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">GBTile</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GBTile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#img2gb.gbtile.GBTile"><code class="docutils literal notranslate"><span class="pre">GBTile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtile.GBTile.data"><code class="docutils literal notranslate"><span class="pre">GBTile.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtile.GBTile.from_image"><code class="docutils literal notranslate"><span class="pre">GBTile.from_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtile.GBTile.get_pixel"><code class="docutils literal notranslate"><span class="pre">GBTile.get_pixel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtile.GBTile.put_pixel"><code class="docutils literal notranslate"><span class="pre">GBTile.put_pixel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtile.GBTile.to_hex_string"><code class="docutils literal notranslate"><span class="pre">GBTile.to_hex_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#img2gb.gbtile.GBTile.to_image"><code class="docutils literal notranslate"><span class="pre">GBTile.to_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="gbtileset.html">GBTileset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gbtilemap.html">GBTilemap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="c_export.html">C Export Functions</a></li>
@@ -65,9 +81,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Python API</a> &raquo;</li>
-      <li>GBTile</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Python API</a></li>
+      <li class="breadcrumb-item active">GBTile</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/gbtile.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -78,7 +94,7 @@
            <div itemprop="articleBody">
              
   <section id="module-img2gb.gbtile">
-<span id="gbtile"></span><h1>GBTile<a class="headerlink" href="#module-img2gb.gbtile" title="Permalink to this headline"></a></h1>
+<span id="gbtile"></span><h1>GBTile<a class="headerlink" href="#module-img2gb.gbtile" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#img2gb.gbtile.GBTile" title="img2gb.gbtile.GBTile"><code class="xref py py-class docutils literal notranslate"><span class="pre">GBTile</span></code></a> class represents a single GameBoy tile (8x8 pixels, 16
 Bytes).</p>
 <p>Creating a tile from scratch:</p>
@@ -100,14 +116,14 @@ Bytes).</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">img2gb.gbtile.</span></span><span class="sig-name descname"><span class="pre">GBTile</span></span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">img2gb.gbtile.</span></span><span class="sig-name descname"><span class="pre">GBTile</span></span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile" title="Link to this definition"></a></dt>
 <dd><p>Stores and manipulates data of a single GameBoy tile (8x8 pixels).</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile.data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#img2gb.gbtile.GBTile.data" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#img2gb.gbtile.GBTile.data" title="Link to this definition"></a></dt>
 <dd><p>Raw data of the tile.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of int</p>
 </dd>
 </dl>
@@ -115,10 +131,10 @@ Bytes).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile.from_image">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pil_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative_palette</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.from_image" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pil_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative_palette</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.from_image" title="Link to this definition"></a></dt>
 <dd><p>Create a new GBTile from the given image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pil_image</strong> (<em>PIL.Image.Image</em>) – The input PIL (or Pillow) image.</p></li>
 <li><p><strong>tile_x</strong> (<em>int</em>) – The x location of the tile in the image (default =
@@ -129,7 +145,7 @@ Bytes).</p>
 (inverted colors, default = <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#img2gb.gbtile.GBTile" title="img2gb.gbtile.GBTile">GBTile</a></p>
 </dd>
 </dl>
@@ -137,16 +153,16 @@ Bytes).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile.get_pixel">
-<span class="sig-name descname"><span class="pre">get_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.get_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.get_pixel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.get_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.get_pixel" title="Link to this definition"></a></dt>
 <dd><p>Returns the color id of a pixel of the tile.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>int</em>) – The x coordinate of the pixel (0-7).</p></li>
 <li><p><strong>y</strong> (<em>int</em>) – The y coordinate of the pixel (0-7).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
 </dl>
@@ -154,10 +170,10 @@ Bytes).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile.put_pixel">
-<span class="sig-name descname"><span class="pre">put_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.put_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.put_pixel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">put_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.put_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.put_pixel" title="Link to this definition"></a></dt>
 <dd><p>Set the color of one of the tile’s pixels.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>int</em>) – The x coordinate of the pixel to change (0-7).</p></li>
 <li><p><strong>y</strong> (<em>int</em>) – The y coordinate of the pixel to change (0-7).</p></li>
@@ -169,10 +185,10 @@ Bytes).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile.to_hex_string">
-<span class="sig-name descname"><span class="pre">to_hex_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.to_hex_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.to_hex_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_hex_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.to_hex_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.to_hex_string" title="Link to this definition"></a></dt>
 <dd><p>Returns the tile as an hexadecimal-encoded string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -184,11 +200,11 @@ Bytes).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="img2gb.gbtile.GBTile.to_image">
-<span class="sig-name descname"><span class="pre">to_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.to_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.to_image" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb/gbtile.html#GBTile.to_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.gbtile.GBTile.to_image" title="Link to this definition"></a></dt>
 <dd><p>Generates a PIL image from the tile. The generated image is an
 indexed image with a 4 shades of gray palette.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>PIL.Image.Image</p>
 </dd>
 </dl>
