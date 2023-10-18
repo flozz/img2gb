@@ -19,8 +19,16 @@ This file is a memo for the maintainer.
 Automated :)
 
 
-3. Publish Github Release
+3. Windows standalone version
+-----------------------------
+
+* Use a fresh Windows VM with Git Bash installed
+* run ``./scripts/build-windows.sh``
+
+
+4. Publish Github Release
 -------------------------
 
 * Make a release on Github
 * Add changelog
+* Add Windows standalone executable
