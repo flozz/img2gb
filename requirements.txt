@@ -12,7 +12,6 @@ filelock==3.12.4
 flake8==6.1.0
 idna==3.4
 imagesize==1.4.1
--e git+ssh://git@github.com/flozz/img2gb.git@c71a91c2f38495e4461e6293824c7edf14211326#egg=img2gb
 iniconfig==2.0.0
 Jinja2==3.1.2
 MarkupSafe==2.1.3
