@@ -88,6 +88,16 @@ Links
 * Article about the tile encoding and img2gb: https://blog.flozz.fr/2018/11/19/developpement-gameboy-5-creer-des-tilesets/ (French)
 
 
+Support this project
+--------------------
+
+Want to support this project?
+
+* `☕️ Buy me a coffee <https://www.buymeacoffee.com/flozz>`__
+* `💵️ Give me a tip on PayPal <https://www.paypal.me/0xflozz>`__
+* `❤️ Sponsor me on GitHub <https://github.com/sponsors/flozz>`__
+
+
 Changelog
 ---------
 
