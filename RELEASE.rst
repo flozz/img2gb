@@ -22,8 +22,9 @@ Automated :)
 3. Windows standalone version
 -----------------------------
 
-* Use a fresh Windows VM with Git Bash installed
-* run ``./scripts/build-windows.sh``
+Automated :)
+
+→ Just download and unzip the artifact of the ``winbuild`` CI workflow.
 
 
 4. Publish Github Release
