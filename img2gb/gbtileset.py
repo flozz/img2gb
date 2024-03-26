@@ -21,7 +21,6 @@ Creating a tileset from a PIL image::
     tileset = GBTileset.from_image(image)
 """
 
-
 from PIL import Image
 
 from .gbtile import GBTile

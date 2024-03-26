@@ -28,14 +28,12 @@ Creating a tilemap from an image::
     tilemap = tilemap.from_image(image)
 """
 
-
 from .gbtile import GBTile
 from .gbtileset import GBTileset
 from .helpers import to_pil_rgb_image
 
 
 class GBTilemap(object):
-
     """Stores and manipulates GameBoy tilemaps.
 
     :param int width: With of the tilemap in tile (default = ``32``).

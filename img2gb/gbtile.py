@@ -20,7 +20,6 @@ Creating a tile from a PIL image::
     tile = GBTile.from_image(image)
 """
 
-
 from PIL import Image
 
 from .helpers import to_pil_rgb_image, rgba_brightness, brightness_to_color_id
