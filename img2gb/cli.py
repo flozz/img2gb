@@ -24,6 +24,13 @@ def generate_tileset_cli(parser):
         help="output C header file",
     )
     parser.add_argument(
+        "-b",
+        "--output-binary",
+        type=argparse.FileType("wb"),
+        metavar="FILE",
+        help="output binary file",
+    )
+    parser.add_argument(
         "-i",
         "--output-image",
         type=argparse.FileType("wb"),
@@ -87,7 +94,13 @@ def generate_tilemap_cli(parser):
         metavar="FILE",
         help="output C header file",
     )
-
+    parser.add_argument(
+        "-b",
+        "--output-binary",
+        type=argparse.FileType("wb"),
+        metavar="FILE",
+        help="output binary file",
+    )
     parser.add_argument(
         "-o",
         "--offset",

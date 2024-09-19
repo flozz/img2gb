@@ -12,6 +12,7 @@ def generate_tileset(
     output_c=None,
     output_h=None,
     output_image=None,
+    output_binary=None,
     name="TILESET",
     dedup=False,
     alternative_palette=False,
@@ -120,6 +121,13 @@ def generate_tileset(
         )
         output_h.write(h_code)
 
+    if output_binary:
+        filename = "%s.bin" % name.lower()
+        if hasattr(output_binary, "name"):
+            filename = os.path.basename(output_binary.name)
+        binary_data = bytearray(tileset.data)
+        output_binary.write(binary_data)
+
     if output_image:
         image = tileset.to_image()
         image.save(output_image, "PNG")
@@ -130,6 +138,7 @@ def generate_tilemap(
     input_tilemap_image,
     output_c=None,
     output_h=None,
+    output_binary=None,
     name="TILEMAP",
     offset=0,
     missing="error",
@@ -211,6 +220,13 @@ def generate_tilemap(
             tilemap.to_c_header_string(name=name), filename=filename
         )
         output_h.write(h_code)
+
+    if output_binary:
+        filename = "%s.tilemap" % name.lower()
+        if hasattr(output_binary, "name"):
+            filename = os.path.basename(output_binary.name)
+        binary_data = bytearray(tilemap.data)
+        output_binary.write(binary_data)
 
 
 __all__ = [
