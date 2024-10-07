@@ -103,7 +103,7 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Nothing yet ;)
+  * feat: Added binary export of tilesets and tilemaps (@duysqubix, #44)
 
 * **v1.2.0:**
 
