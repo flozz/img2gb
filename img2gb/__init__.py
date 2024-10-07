@@ -12,6 +12,7 @@ def generate_tileset(
     output_c=None,
     output_h=None,
     output_image=None,
+    output_binary=None,
     name="TILESET",
     dedup=False,
     alternative_palette=False,
@@ -28,6 +29,16 @@ def generate_tileset(
             be generated (``None`` to not generate C header code).
     :param file output_image: A file-like object where the image representing
             the tileset will be generated (``None`` to not generate the image).
+
+            .. NOTE::
+
+               The file must be openend in binary mode (``open("file", "wb")``)
+               or you must be using a binary-compatible file-like object, like
+               a :class:`io.BytesIO`.
+
+    :param file output_binary: A file-like object where the binary version of
+            the tileset will be generated (``None`` to not generate the binary
+            version).
 
             .. NOTE::
 
@@ -120,6 +131,10 @@ def generate_tileset(
         )
         output_h.write(h_code)
 
+    if output_binary:
+        binary_data = bytearray(tileset.data)
+        output_binary.write(binary_data)
+
     if output_image:
         image = tileset.to_image()
         image.save(output_image, "PNG")
@@ -130,6 +145,7 @@ def generate_tilemap(
     input_tilemap_image,
     output_c=None,
     output_h=None,
+    output_binary=None,
     name="TILEMAP",
     offset=0,
     missing="error",
@@ -146,6 +162,16 @@ def generate_tilemap(
             (``None`` to not generate C code).
     :param file output_h: A file-like object where the C header (.h) code will
             be generated (``None`` to not generate C header code).
+    :param file output_binary: A file-like object where the binary version of
+            the tilemap will be generated (``None`` to not generate the binary
+            version).
+
+            .. NOTE::
+
+               The file must be openend in binary mode (``open("file", "wb")``)
+               or you must be using a binary-compatible file-like object, like
+               a :class:`io.BytesIO`.
+
     :param str name: The name of the tilemap (will be used in the generated
             code, default = ``"TILEMAP"``).
     :param int offset: Offset where the tileset starts (useful only of you will
@@ -211,6 +237,10 @@ def generate_tilemap(
             tilemap.to_c_header_string(name=name), filename=filename
         )
         output_h.write(h_code)
+
+    if output_binary:
+        binary_data = bytearray(tilemap.data)
+        output_binary.write(binary_data)
 
 
 __all__ = [

@@ -31,6 +31,13 @@ def generate_tileset_cli(parser):
         help="output image file representing the tileset (required to generate a tilemap)",
     )
     parser.add_argument(
+        "-b",
+        "--output-binary",
+        type=argparse.FileType("wb"),
+        metavar="FILE",
+        help="output binary file",
+    )
+    parser.add_argument(
         "-d",
         "--deduplicate",
         action="store_true",
@@ -87,7 +94,13 @@ def generate_tilemap_cli(parser):
         metavar="FILE",
         help="output C header file",
     )
-
+    parser.add_argument(
+        "-b",
+        "--output-binary",
+        type=argparse.FileType("wb"),
+        metavar="FILE",
+        help="output binary file",
+    )
     parser.add_argument(
         "-o",
         "--offset",
