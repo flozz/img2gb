@@ -36,6 +36,16 @@ def generate_tileset(
                or you must be using a binary-compatible file-like object, like
                a :class:`io.BytesIO`.
 
+    :param file output_binary: A file-like object where the binary version of
+            the tileset will be generated (``None`` to not generate the binary
+            version).
+
+            .. NOTE::
+
+               The file must be openend in binary mode (``open("file", "wb")``)
+               or you must be using a binary-compatible file-like object, like
+               a :class:`io.BytesIO`.
+
     :param str name: The name of the tileset (will be used in the generated
             code, default = ``"TILESET"``)
     :param bool dedup: Deduplicate the tiles of the tileset (default =
@@ -152,6 +162,16 @@ def generate_tilemap(
             (``None`` to not generate C code).
     :param file output_h: A file-like object where the C header (.h) code will
             be generated (``None`` to not generate C header code).
+    :param file output_binary: A file-like object where the binary version of
+            the tilemap will be generated (``None`` to not generate the binary
+            version).
+
+            .. NOTE::
+
+               The file must be openend in binary mode (``open("file", "wb")``)
+               or you must be using a binary-compatible file-like object, like
+               a :class:`io.BytesIO`.
+
     :param str name: The name of the tilemap (will be used in the generated
             code, default = ``"TILEMAP"``).
     :param int offset: Offset where the tileset starts (useful only of you will
