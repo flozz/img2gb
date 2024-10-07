@@ -122,9 +122,6 @@ def generate_tileset(
         output_h.write(h_code)
 
     if output_binary:
-        filename = "%s.bin" % name.lower()
-        if hasattr(output_binary, "name"):
-            filename = os.path.basename(output_binary.name)
         binary_data = bytearray(tileset.data)
         output_binary.write(binary_data)
 
@@ -222,9 +219,6 @@ def generate_tilemap(
         output_h.write(h_code)
 
     if output_binary:
-        filename = "%s.tilemap" % name.lower()
-        if hasattr(output_binary, "name"):
-            filename = os.path.basename(output_binary.name)
         binary_data = bytearray(tilemap.data)
         output_binary.write(binary_data)
 
