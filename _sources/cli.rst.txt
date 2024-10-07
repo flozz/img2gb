@@ -40,6 +40,8 @@ Tileset CLI
       -i FILE, --output-image FILE
                             output image file representing the tileset (required
                             to generate a tilemap)
+      -b FILE, --output-binary FILE
+                            output binary file
       -d, --deduplicate     remove duplicated tiles from the tileset
       -a, --alternative-palette
                             invert the colors to allow tiles to be used with the
@@ -67,6 +69,8 @@ Tilemap CLI
                             output C file
       -H FILE, --output-header-file FILE
                             output C header file
+      -b FILE, --output-binary FILE
+                            output binary file
       -o OFFSET, --offset OFFSET
                             offset of the tileset in the video memory (default =
                             0)

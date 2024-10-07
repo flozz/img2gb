@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -6,18 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>High-Level Functions &mdash; img2gb  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=7ab3649f" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -102,7 +100,7 @@ tilemaps.</p>
 <h2>Generating Tilesets<a class="headerlink" href="#generating-tilesets" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="img2gb.generate_tileset">
-<span class="sig-prename descclassname"><span class="pre">img2gb.</span></span><span class="sig-name descname"><span class="pre">generate_tileset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILESET'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative_palette</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sprite8x16</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tileset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.generate_tileset" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">img2gb.</span></span><span class="sig-name descname"><span class="pre">generate_tileset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_binary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILESET'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alternative_palette</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sprite8x16</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tileset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.generate_tileset" title="Link to this definition"></a></dt>
 <dd><p>Function that generates tileset’s C file, C header and image from an
 input image.</p>
 <dl class="field-list simple">
@@ -116,6 +114,16 @@ tileset from.</p></li>
 be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C header code).</p></li>
 <li><p><strong>output_image</strong> (<em>file</em>) – <p>A file-like object where the image representing
 the tileset will be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate the image).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file must be openend in binary mode (<code class="docutils literal notranslate"><span class="pre">open(&quot;file&quot;,</span> <span class="pre">&quot;wb&quot;)</span></code>)
+or you must be using a binary-compatible file-like object, like
+a <code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code>.</p>
+</div>
+</p></li>
+<li><p><strong>output_binary</strong> (<em>file</em>) – <p>A file-like object where the binary version of
+the tileset will be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate the binary
+version).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The file must be openend in binary mode (<code class="docutils literal notranslate"><span class="pre">open(&quot;file&quot;,</span> <span class="pre">&quot;wb&quot;)</span></code>)
@@ -185,7 +193,7 @@ code, default = <code class="docutils literal notranslate"><span class="pre">&qu
 <h2>Generating Tilemaps<a class="headerlink" href="#generating-tilemaps" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="img2gb.generate_tilemap">
-<span class="sig-prename descclassname"><span class="pre">img2gb.</span></span><span class="sig-name descname"><span class="pre">generate_tilemap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_tileset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_tilemap_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'error'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tilemap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.generate_tilemap" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">img2gb.</span></span><span class="sig-name descname"><span class="pre">generate_tilemap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_tileset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_tilemap_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_binary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TILEMAP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'error'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/img2gb.html#generate_tilemap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#img2gb.generate_tilemap" title="Link to this definition"></a></dt>
 <dd><p>Function that generates tilemap’s C file and C header from an input
 tileset and image.</p>
 <dl class="field-list simple">
@@ -199,6 +207,16 @@ tilemap (its size must be a multiple of 8 and 256x256px maximum).</p></li>
 (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C code).</p></li>
 <li><p><strong>output_h</strong> (<em>file</em>) – A file-like object where the C header (.h) code will
 be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate C header code).</p></li>
+<li><p><strong>output_binary</strong> (<em>file</em>) – <p>A file-like object where the binary version of
+the tilemap will be generated (<code class="docutils literal notranslate"><span class="pre">None</span></code> to not generate the binary
+version).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file must be openend in binary mode (<code class="docutils literal notranslate"><span class="pre">open(&quot;file&quot;,</span> <span class="pre">&quot;wb&quot;)</span></code>)
+or you must be using a binary-compatible file-like object, like
+a <code class="xref py py-class docutils literal notranslate"><span class="pre">io.BytesIO</span></code>.</p>
+</div>
+</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – The name of the tilemap (will be used in the generated
 code, default = <code class="docutils literal notranslate"><span class="pre">&quot;TILEMAP&quot;</span></code>).</p></li>
 <li><p><strong>offset</strong> (<em>int</em>) – Offset where the tileset starts (useful only of you will
