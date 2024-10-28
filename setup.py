@@ -12,7 +12,7 @@ if os.path.isfile("README.rst"):
 
 setup(
     name="img2gb",
-    version="1.2.0",
+    version="1.3.0",
     description="Converts images to GameBoy tileset",
     url="https://github.com/flozz/img2gb",
     project_urls={
