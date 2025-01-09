@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GBTile &mdash; img2gb  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
@@ -98,7 +98,7 @@
 <p>The <a class="reference internal" href="#img2gb.gbtile.GBTile" title="img2gb.gbtile.GBTile"><code class="xref py py-class docutils literal notranslate"><span class="pre">GBTile</span></code></a> class represents a single GameBoy tile (8x8 pixels, 16
 Bytes).</p>
 <p>Creating a tile from scratch:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">img2gb</span> <span class="kn">import</span> <span class="n">GBTile</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">img2gb</span><span class="w"> </span><span class="kn">import</span> <span class="n">GBTile</span>
 
 <span class="n">tile</span> <span class="o">=</span> <span class="n">GBTile</span><span class="p">()</span>
 <span class="n">tile</span><span class="o">.</span><span class="n">put_pixel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Put a black pixel at (0, 0)</span>
@@ -107,8 +107,8 @@ Bytes).</p>
 </pre></div>
 </div>
 <p>Creating a tile from a PIL image:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">img2gb</span> <span class="kn">import</span> <span class="n">GBTile</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">img2gb</span><span class="w"> </span><span class="kn">import</span> <span class="n">GBTile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;./my_tile.png&quot;</span><span class="p">)</span>
 <span class="n">tile</span> <span class="o">=</span> <span class="n">GBTile</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
