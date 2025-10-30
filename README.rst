@@ -17,7 +17,7 @@ img2gb - Converts Images to GameBoy Tileset and Tilemap
 Dependencies
 ------------
 
-* Python >= 3.9
+* Python >= 3.10
 * Pillow >= 5.0
 
 
@@ -68,11 +68,11 @@ version with::
 
     nox -s test       # Run on all Python version
 
-    nox -s test-3.9   # Run on Python 3.9
     nox -s test-3.10  # Run on Python 3.10
     nox -s test-3.11  # Run on Python 3.11
     nox -s test-3.12  # Run on Python 3.12
     nox -s test-3.12  # Run on Python 3.13
+    nox -s test-3.12  # Run on Python 3.14
 
 And you can build the documentation with (result in ``build/html/``)::
 
@@ -103,7 +103,8 @@ Changelog
 
 * **[NEXT]** (changes on ``master``, but not released yet):
 
-  * Nothing yet ;)
+  * misc: Added Python 3.14 support (@flozz)
+  * misc!: Removed Python 3.9 support (@flozz)
 
 * **v1.3.0:**
 
