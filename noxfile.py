@@ -1,6 +1,5 @@
 import nox
 
-
 PYTHON_FILES = [
     "img2gb",
     "setup.py",
