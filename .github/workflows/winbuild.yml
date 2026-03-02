@@ -33,6 +33,6 @@ jobs:
           ./scripts/build-windows.sh
 
       - name: "Archive Windows Build"
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           path: dist/img2gb-*.exe
