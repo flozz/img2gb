@@ -58,7 +58,7 @@ class GBTilemap(object):
 
                 * ``"append"`` (default): append the tile to the tileset,
                 * ``"error"``: raise an error,
-                * ``"replace"``: relpace by an other tile (see the ``replace``
+                * ``"replace"``: replace by an other tile (see the ``replace``
                   argument).
 
         :param int replace: The id of the replacement tile when
@@ -144,7 +144,7 @@ class GBTilemap(object):
 
                 * ``"append"`` (default): append the tile to the tileset,
                 * ``"error"``: raise an error,
-                * ``"replace"``: relpace by an other tile (see the ``replace``
+                * ``"replace"``: replace by an other tile (see the ``replace``
                   argument).
 
         :param int replace: The id of the replacement tile when
