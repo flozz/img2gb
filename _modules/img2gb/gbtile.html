@@ -73,7 +73,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for img2gb.gbtile</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">The :class:`GBTile` class represents a single GameBoy tile (8x8 pixels, 16</span>
 <span class="sd">Bytes).</span>
 
@@ -84,16 +84,16 @@
 <span class="sd">    tile = GBTile()</span>
 <span class="sd">    tile.put_pixel(0, 0, 3)  # Put a black pixel at (0, 0)</span>
 <span class="sd">    tile.data  # -&gt; [128, 128, 0, 0, 0, ...]</span>
-<span class="sd">    tile.to_hex_string()  # -&gt; &quot;80 80 00 00 00 ...&quot;</span>
+<span class="sd">    tile.to_hex_string()  # -&gt; "80 80 00 00 00 ..."</span>
 
 <span class="sd">Creating a tile from a PIL image::</span>
 
 <span class="sd">    from img2gb import GBTile</span>
 <span class="sd">    from PIL import Image</span>
 
-<span class="sd">    image = Image.open(&quot;./my_tile.png&quot;)</span>
+<span class="sd">    image = Image.open("./my_tile.png")</span>
 <span class="sd">    tile = GBTile.from_image(image)</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 
@@ -103,24 +103,24 @@
 <div class="viewcode-block" id="GBTile">
 <a class="viewcode-back" href="../../api/gbtile.html#img2gb.gbtile.GBTile">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GBTile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stores and manipulates data of a single GameBoy tile (8x8 pixels).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Stores and manipulates data of a single GameBoy tile (8x8 pixels)."""</span>
 
 <div class="viewcode-block" id="GBTile.from_image">
 <a class="viewcode-back" href="../../api/gbtile.html#img2gb.gbtile.GBTile.from_image">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_image</span><span class="p">(</span><span class="n">Cls</span><span class="p">,</span> <span class="n">pil_image</span><span class="p">,</span> <span class="n">tile_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tile_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alternative_palette</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new GBTile from the given image.</span>
+<span class="w">        </span><span class="sd">"""Create a new GBTile from the given image.</span>
 
 <span class="sd">        :param PIL.Image.Image pil_image: The input PIL (or Pillow) image.</span>
 <span class="sd">        :param int tile_x: The x location of the tile in the image (default =</span>
 <span class="sd">                ``0``).</span>
 <span class="sd">        :param int tile_y: The y location of the tile in the image (default =</span>
 <span class="sd">                ``0``).</span>
-<span class="sd">        :param bool alternative_palette: Use the sprite&#39;s alternative palette</span>
+<span class="sd">        :param bool alternative_palette: Use the sprite's alternative palette</span>
 <span class="sd">                (inverted colors, default = ``False``).</span>
 
 <span class="sd">        :rtype: GBTile</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">to_pil_rgb_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
         <span class="n">tile</span> <span class="o">=</span> <span class="n">Cls</span><span class="p">()</span>
 
@@ -141,21 +141,21 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raw data of the tile.</span>
+<span class="w">        </span><span class="sd">"""Raw data of the tile.</span>
 
 <span class="sd">        :type: list of int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 
 <div class="viewcode-block" id="GBTile.put_pixel">
 <a class="viewcode-back" href="../../api/gbtile.html#img2gb.gbtile.GBTile.put_pixel">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">put_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color_id</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the color of one of the tile&#39;s pixels.</span>
+<span class="w">        </span><span class="sd">"""Set the color of one of the tile's pixels.</span>
 
 <span class="sd">        :param int x: The x coordinate of the pixel to change (0-7).</span>
 <span class="sd">        :param int y: The y coordinate of the pixel to change (0-7).</span>
 <span class="sd">        :param int color_id: the color of the pixel (0-3).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="mb">0b00000001</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">mask1</span> <span class="o">=</span> <span class="n">mask</span> <span class="k">if</span> <span class="n">color_id</span> <span class="o">&amp;</span> <span class="mb">0b01</span> <span class="k">else</span> <span class="mb">0b00000000</span>
         <span class="n">mask2</span> <span class="o">=</span> <span class="n">mask</span> <span class="k">if</span> <span class="n">color_id</span> <span class="o">&amp;</span> <span class="mb">0b10</span> <span class="k">else</span> <span class="mb">0b00000000</span>
@@ -172,12 +172,12 @@
 <div class="viewcode-block" id="GBTile.get_pixel">
 <a class="viewcode-back" href="../../api/gbtile.html#img2gb.gbtile.GBTile.get_pixel">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the color id of a pixel of the tile.</span>
+<span class="w">        </span><span class="sd">"""Returns the color id of a pixel of the tile.</span>
 
 <span class="sd">        :param int x: The x coordinate of the pixel (0-7).</span>
 <span class="sd">        :param int y: The y coordinate of the pixel (0-7).</span>
 <span class="sd">        :rtype: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="mb">0b00000001</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">lbit</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">hbit</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">7</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
@@ -187,26 +187,26 @@
 <div class="viewcode-block" id="GBTile.to_hex_string">
 <a class="viewcode-back" href="../../api/gbtile.html#img2gb.gbtile.GBTile.to_hex_string">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_hex_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the tile as an hexadecimal-encoded string.</span>
+<span class="w">        </span><span class="sd">"""Returns the tile as an hexadecimal-encoded string.</span>
 
 <span class="sd">        :rtype: str</span>
 
 <span class="sd">        e.g.::</span>
 
-<span class="sd">            &quot;04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66&quot;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%02X</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">])</span></div>
+<span class="sd">            "04 04 04 04 0A 0A 12 12 66 00 99 77 99 77 66 66"</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">"</span><span class="si">%02X</span><span class="s2">"</span> <span class="o">%</span> <span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="GBTile.to_image">
 <a class="viewcode-back" href="../../api/gbtile.html#img2gb.gbtile.GBTile.to_image">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a PIL image from the tile. The generated image is an</span>
+<span class="w">        </span><span class="sd">"""Generates a PIL image from the tile. The generated image is an</span>
 <span class="sd">        indexed image with a 4 shades of gray palette.</span>
 
 <span class="sd">        :rtype: PIL.Image.Image</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"P"</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">image</span><span class="o">.</span><span class="n">putpalette</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="c1"># fmt: off</span>

@@ -89,12 +89,12 @@
     <span class="n">output_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">output_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">output_binary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TILESET&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"TILESET"</span><span class="p">,</span>
     <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">alternative_palette</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sprite8x16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that generates tileset&#39;s C file, C header and image from an</span>
+<span class="w">    </span><span class="sd">"""Function that generates tileset's C file, C header and image from an</span>
 <span class="sd">    input image.</span>
 
 <span class="sd">    :param PIL.Image.Image|list input_images: The input image to generate the</span>
@@ -108,7 +108,7 @@
 
 <span class="sd">            .. NOTE::</span>
 
-<span class="sd">               The file must be openend in binary mode (``open(&quot;file&quot;, &quot;wb&quot;)``)</span>
+<span class="sd">               The file must be openend in binary mode (``open("file", "wb")``)</span>
 <span class="sd">               or you must be using a binary-compatible file-like object, like</span>
 <span class="sd">               a :class:`io.BytesIO`.</span>
 
@@ -118,15 +118,15 @@
 
 <span class="sd">            .. NOTE::</span>
 
-<span class="sd">               The file must be openend in binary mode (``open(&quot;file&quot;, &quot;wb&quot;)``)</span>
+<span class="sd">               The file must be openend in binary mode (``open("file", "wb")``)</span>
 <span class="sd">               or you must be using a binary-compatible file-like object, like</span>
 <span class="sd">               a :class:`io.BytesIO`.</span>
 
 <span class="sd">    :param str name: The name of the tileset (will be used in the generated</span>
-<span class="sd">            code, default = ``&quot;TILESET&quot;``)</span>
+<span class="sd">            code, default = ``"TILESET"``)</span>
 <span class="sd">    :param bool dedup: Deduplicate the tiles of the tileset (default =</span>
 <span class="sd">            ``False``)</span>
-<span class="sd">    :param bool alternative_palette: Use the sprite&#39;s alternative palette</span>
+<span class="sd">    :param bool alternative_palette: Use the sprite's alternative palette</span>
 <span class="sd">            (inverted colors, default = ``False``)</span>
 <span class="sd">    :param bool sprite8x16: Rearrange the tiles to be used in 8x16 sprites</span>
 <span class="sd">            (default = ``False``).</span>
@@ -136,10 +136,10 @@
 <span class="sd">        from PIL import Image</span>
 <span class="sd">        import img2gb</span>
 
-<span class="sd">        image = Image.open(&quot;./my_tileset.png&quot;)</span>
-<span class="sd">        c_file = open(&quot;example.c&quot;, &quot;w&quot;)</span>
-<span class="sd">        h_file = open(&quot;example.h&quot;, &quot;w&quot;)</span>
-<span class="sd">        image_file = open(&quot;example.png&quot;, &quot;wb&quot;)</span>
+<span class="sd">        image = Image.open("./my_tileset.png")</span>
+<span class="sd">        c_file = open("example.c", "w")</span>
+<span class="sd">        h_file = open("example.h", "w")</span>
+<span class="sd">        image_file = open("example.png", "wb")</span>
 
 <span class="sd">        img2gb.generate_tileset(</span>
 <span class="sd">            [image],</span>
@@ -158,7 +158,7 @@
 <span class="sd">        from PIL import Image</span>
 <span class="sd">        import img2gb</span>
 
-<span class="sd">        image = Image.open(&quot;./my_tileset.png&quot;)</span>
+<span class="sd">        image = Image.open("./my_tileset.png")</span>
 <span class="sd">        c_code_io = StringIO()</span>
 <span class="sd">        h_code_io = StringIO()</span>
 <span class="sd">        output_image = BytesIO()</span>
@@ -174,7 +174,7 @@
 <span class="sd">        c_code_io.seek(0)</span>
 <span class="sd">        c_code = c_code_io.read()</span>
 <span class="sd">        print(c_code)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">input_images</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
         <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
             <span class="n">input_images</span><span class="p">,</span>
@@ -199,8 +199,8 @@
         <span class="n">output_c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">output_h</span><span class="p">:</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.h&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">output_h</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">.h"</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">output_h</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">):</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_h</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">h_code</span> <span class="o">=</span> <span class="n">generate_c_header_file</span><span class="p">(</span>
             <span class="n">tileset</span><span class="o">.</span><span class="n">to_c_header_string</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">),</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
@@ -213,7 +213,7 @@
 
     <span class="k">if</span> <span class="n">output_image</span><span class="p">:</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">tileset</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span>
-        <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_image</span><span class="p">,</span> <span class="s2">&quot;PNG&quot;</span><span class="p">)</span></div>
+        <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_image</span><span class="p">,</span> <span class="s2">"PNG"</span><span class="p">)</span></div>
 
 
 
@@ -225,12 +225,12 @@
     <span class="n">output_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">output_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">output_binary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;TILEMAP&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"TILEMAP"</span><span class="p">,</span>
     <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">missing</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+    <span class="n">missing</span><span class="o">=</span><span class="s2">"error"</span><span class="p">,</span>
     <span class="n">replace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that generates tilemap&#39;s C file and C header from an input</span>
+<span class="w">    </span><span class="sd">"""Function that generates tilemap's C file and C header from an input</span>
 <span class="sd">    tileset and image.</span>
 
 <span class="sd">    :param PIL.Image.Image input_tileset: The tileset that contains the tiles</span>
@@ -247,24 +247,24 @@
 
 <span class="sd">            .. NOTE::</span>
 
-<span class="sd">               The file must be openend in binary mode (``open(&quot;file&quot;, &quot;wb&quot;)``)</span>
+<span class="sd">               The file must be openend in binary mode (``open("file", "wb")``)</span>
 <span class="sd">               or you must be using a binary-compatible file-like object, like</span>
 <span class="sd">               a :class:`io.BytesIO`.</span>
 
 <span class="sd">    :param str name: The name of the tilemap (will be used in the generated</span>
-<span class="sd">            code, default = ``&quot;TILEMAP&quot;``).</span>
+<span class="sd">            code, default = ``"TILEMAP"``).</span>
 <span class="sd">    :param int offset: Offset where the tileset starts (useful only of you will</span>
 <span class="sd">            load the given tileset at a place different from ``0`` in the</span>
 <span class="sd">            GameBoy video memeory).</span>
 <span class="sd">    :param string missing: Action to do if a tile of the tilemap is missing</span>
 <span class="sd">            from the tileset:</span>
 
-<span class="sd">            * ``&quot;error&quot;`` (default): raise an error,</span>
-<span class="sd">            * ``&quot;replace&quot;``: replace the missing tile by an other one (see</span>
+<span class="sd">            * ``"error"`` (default): raise an error,</span>
+<span class="sd">            * ``"replace"``: replace the missing tile by an other one (see</span>
 <span class="sd">              ``replace`` option).</span>
 
 <span class="sd">    :param int replace: The id of the replacement tile when</span>
-<span class="sd">            ``missing=&quot;replace&quot;``.</span>
+<span class="sd">            ``missing="replace"``.</span>
 
 <span class="sd">    Example:</span>
 
@@ -274,7 +274,7 @@
 <span class="sd">        from PIL import Image</span>
 <span class="sd">        import img2gb</span>
 
-<span class="sd">        image = Image.open(&quot;./my_tilemap.png&quot;)</span>
+<span class="sd">        image = Image.open("./my_tilemap.png")</span>
 
 <span class="sd">        # Generate the tileset image from the tilemap image</span>
 <span class="sd">        tileset_io = BytesIO()</span>
@@ -289,12 +289,12 @@
 <span class="sd">        img2gb.generate_tilemap(</span>
 <span class="sd">            tileset_image,</span>
 <span class="sd">            image,</span>
-<span class="sd">            output_c=open(&quot;tilemap.c&quot;, &quot;w&quot;),</span>
-<span class="sd">            output_h=open(&quot;tilemap.h&quot;, &quot;w&quot;))</span>
+<span class="sd">            output_c=open("tilemap.c", "w"),</span>
+<span class="sd">            output_h=open("tilemap.h", "w"))</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s2">&quot;append&quot;</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;missing=append is not available from high level functions&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s2">"append"</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"missing=append is not available from high level functions"</span><span class="p">)</span>
 
     <span class="n">tileset</span> <span class="o">=</span> <span class="n">GBTileset</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">input_tileset</span><span class="p">,</span> <span class="n">dedup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
     <span class="n">tilemap</span> <span class="o">=</span> <span class="n">GBTilemap</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span>
@@ -309,8 +309,8 @@
         <span class="n">output_c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">output_h</span><span class="p">:</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.h&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">output_h</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">.h"</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">output_h</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">):</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_h</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">h_code</span> <span class="o">=</span> <span class="n">generate_c_header_file</span><span class="p">(</span>
             <span class="n">tilemap</span><span class="o">.</span><span class="n">to_c_header_string</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">),</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
@@ -324,12 +324,12 @@
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;GBTile&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GBTileset&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GBTilemap&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;generate_tileset&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;generate_tilemap&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;VERSION&quot;</span><span class="p">,</span>
+    <span class="s2">"GBTile"</span><span class="p">,</span>
+    <span class="s2">"GBTileset"</span><span class="p">,</span>
+    <span class="s2">"GBTilemap"</span><span class="p">,</span>
+    <span class="s2">"generate_tileset"</span><span class="p">,</span>
+    <span class="s2">"generate_tilemap"</span><span class="p">,</span>
+    <span class="s2">"VERSION"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 
